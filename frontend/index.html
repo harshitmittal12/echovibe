@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EchoVibe | Music Discovery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="universal.css" />
+    <link rel="stylesheet" href="feature-sections.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js for Lusion Particle Effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  </head>
+  <body>
+
+
+    <nav class="navbar">
+      <div class="logo">ECHOVIBE</div>
+      
+      <!-- DESKTOP LINKS -->
+      <ul class="nav-links desktop-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="playlist.html">Playlists</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="login.html" class="cta-btn small">Log In</a></li>
+      </ul>
+
+      <!-- MOBILE BURGER -->
+      <div class="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-menu-overlay">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="playlist.html">Playlists</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="login.html">Log In</a></li>
+      </ul>
+    </div>
+
+    <main>
+    <main>
+      <!-- OLD HERO REMOVED AS REQUESTED -->
+
+      <section class="horizontal-scroll">
+
+      <section class="horizontal-scroll">
+        <div class="pin-wrapper">
+          <!-- SLIDE 1: ARTISTS (Editorial Left Text / Right Image) -->
+          <div class="slide editorial-slide artists-split">
+            <div class="split-text-panel">
+              <span class="editorial-label">01 — CREATORS</span>
+              <h1 class="split-title">SONIC<br>IDENTITY</h1>
+              <p class="split-desc">
+                Don't get lost in the feed. Upload high-fidelity audio and let our 
+                algorithm match your frequency with listeners searching for exactly your sound.
+              </p>
+              <a href="#" class="editorial-link">START UPLOADING <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="split-image-panel">
+               <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?q=80&w=1000&auto=format&fit=crop" alt="Artist Performing">
+               <div class="panel-overlay"></div>
+            </div>
+          </div>
+
+          <!-- SLIDE 2: LISTENERS (Editorial Right Text / Left Image) -->
+          <div class="slide editorial-slide listeners-split">
+             <div class="split-image-panel">
+               <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1000&auto=format&fit=crop" alt="Listener Vibe">
+               <div class="panel-overlay"></div>
+            </div>
+            <div class="split-text-panel">
+              <span class="editorial-label">02 — DISCOVERERS</span>
+              <h1 class="split-title">PURE<br>DISCOVERY</h1>
+              <p class="split-desc">
+                The algorithm isn't God. Break the bubble of "Recommended for You" 
+                and dive into a raw stream of verified underground talent.
+              </p>
+               <a href="#" class="editorial-link">EXPLORE NOW <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <!-- VINYL REMOVED AS REQUESTED -->
+        </div>
+      </section>
+
+      <!-- NEW SECTION 1: FEATURE SPOTLIGHT CAROUSEL -->
+      <section class="feature-spotlight-section section-gap">
+          <div class="container">
+              <div class="spotlight-carousel" id="spotlightCarousel">
+                  
+                  <!-- Slide 1: Shazam Feature -->
+                  <div class="spotlight-slide active" data-slide="1">
+                      <div class="spotlight-bg">
+                          <div class="waveform-animation">
+                              <span></span><span></span><span></span><span></span><span></span>
+                              <span></span><span></span><span></span><span></span><span></span>
+                          </div>
+                      </div>
+                      <div class="spotlight-content">
+                          <span class="spotlight-label">FEATURE 01</span>
+                          <h2 class="spotlight-title">Never Ask<br>"What's This Song?"<br>Again</h2>
+                          <p class="spotlight-desc">Tap, identify, save - all in one place. Shazam-powered AI recognition built right into your music player.</p>
+                          <a href="features.html" class="spotlight-cta">Try Song ID <i class="fas fa-microphone ms-2"></i></a>
+                      </div>
+                      <div class="spotlight-visual">
+                          <div class="shazam-button-demo">
+                              <div class="ripple-ring"></div>
+                              <div class="ripple-ring"></div>
+                              <div class="ripple-ring"></div>
+                              <i class="fas fa-microphone"></i>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Slide 2: AI Mood Feature -->
+                  <div class="spotlight-slide" data-slide="2">
+                      <div class="spotlight-bg">
+                          <div class="brain-scan-animation"></div>
+                      </div>
+                      <div class="spotlight-content">
+                          <span class="spotlight-label">FEATURE 02</span>
+                          <h2 class="spotlight-title">Music That<br>Matches<br>Your Mood</h2>
+                          <p class="spotlight-desc">AI-powered mood detection in 3 questions. Get playlists that actually understand how you feel.</p>
+                          <a href="features.html" class="spotlight-cta">Find Your Vibe <i class="fas fa-brain ms-2"></i></a>
+                      </div>
+                      <div class="spotlight-visual">
+                          <div class="mood-brain-demo">
+                              <div class="neural-network">
+                                  <div class="neuron"></div>
+                                  <div class="neuron"></div>
+                                  <div class="neuron"></div>
+                                  <div class="neuron"></div>
+                                  <div class="neuron"></div>
+                              </div>
+                              <i class="fas fa-brain"></i>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Slide 3: Underground Stream -->
+                  <div class="spotlight-slide" data-slide="3">
+                      <div class="spotlight-bg">
+                          <div class="particle-network"></div>
+                      </div>
+                      <div class="spotlight-content">
+                          <span class="spotlight-label">FEATURE 03</span>
+                          <h2 class="spotlight-title">Stream The<br>Underground</h2>
+                          <p class="spotlight-desc">Discover tracks Spotify won't show you. Curated from the depths of the music world.</p>
+                          <a href="explore.html" class="spotlight-cta">Explore Now <i class="fas fa-music ms-2"></i></a>
+                      </div>
+                      <div class="spotlight-visual">
+                          <div class="vinyl-demo">
+                              <div class="vinyl-record">
+                                  <div class="vinyl-center"></div>
+                                  <div class="vinyl-groove"></div>
+                              </div>
+                              <div class="vinyl-glow"></div>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+
+              <!-- Carousel Controls -->
+              <div class="spotlight-controls">
+                  <button class="spotlight-dot active" data-slide="1"></button>
+                  <button class="spotlight-dot" data-slide="2"></button>
+                  <button class="spotlight-dot" data-slide="3"></button>
+              </div>
+          </div>
+      </section>
+
+      <!-- NEW SECTION 2: 3-IN-1 REVOLUTION BANNER -->
+      <section class="revolution-banner-section section-gap">
+          <div class="container text-center">
+              <span class="section-label">THE ECHOVIBE DIFFERENCE</span>
+              <h2 class="revolution-title">3-in-1 Music Revolution</h2>
+              <p class="revolution-subtitle">The only platform that combines streaming, identification, and AI mood matching</p>
+              
+              <div class="revolution-grid">
+                  <div class="revolution-card">
+                      <div class="revolution-icon stream-icon">
+                          <i class="fas fa-music"></i>
+                          <div class="icon-glow"></div>
+                      </div>
+                      <h3>STREAM</h3>
+                      <p>Unlimited underground tracks</p>
+                  </div>
+                  
+                  <div class="revolution-plus">+</div>
+                  
+                  <div class="revolution-card">
+                      <div class="revolution-icon identify-icon">
+                          <i class="fas fa-microphone"></i>
+                          <div class="icon-glow"></div>
+                      </div>
+                      <h3>IDENTIFY</h3>
+                      <p>Shazam-powered recognition</p>
+                  </div>
+                  
+                  <div class="revolution-plus">+</div>
+                  
+                  <div class="revolution-card">
+                      <div class="revolution-icon mood-icon">
+                          <i class="fas fa-brain"></i>
+                          <div class="icon-glow"></div>
+                      </div>
+                      <h3>AI MATCH</h3>
+                      <p>Mood-based recommendations</p>
+                  </div>
+              </div>
+
+              <div class="revolution-tagline">
+                  "The Only Music Platform That Does It All"
+              </div>
+          </div>
+      </section>
+
+      <!-- NEW SECTION 3: COMPARISON TABLE -->
+      <section class="comparison-section section-gap">
+          <div class="container">
+              <div class="text-center mb-5">
+                  <span class="section-label">WHY CHOOSE US</span>
+                  <h2 class="comparison-title">EchoVibe vs The Rest</h2>
+                  <p class="comparison-subtitle">See how we stack up against the competition</p>
+              </div>
+
+              <div class="comparison-table-wrapper">
+                  <table class="comparison-table">
+                      <thead>
+                          <tr>
+                              <th class="feature-col">Feature</th>
+                              <th class="competitor-col">
+                                  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Ctext x='10' y='20' fill='%23666' font-size='16' font-weight='bold'%3ESpotify%3C/text%3E%3C/svg%3E" alt="Spotify">
+                              </th>
+                              <th class="competitor-col">
+                                  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Ctext x='10' y='20' fill='%23666' font-size='16' font-weight='bold'%3EShazam%3C/text%3E%3C/svg%3E" alt="Shazam">
+                              </th>
+                              <th class="competitor-col">
+                                  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30'%3E%3Ctext x='5' y='20' fill='%23666' font-size='14' font-weight='bold'%3EApple Music%3C/text%3E%3C/svg%3E" alt="Apple Music">
+                              </th>
+                              <th class="echovibe-col">
+                                  <span class="echovibe-badge">ECHOVIBE</span>
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td class="feature-name">Stream Music</td>
+                              <td><i class="fas fa-check check-yes"></i></td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-check check-yes"></i></td>
+                              <td><i class="fas fa-check-circle check-echovibe"></i></td>
+                          </tr>
+                          <tr>
+                              <td class="feature-name">Song Identification</td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-check check-yes"></i></td>
+                              <td><i class="fas fa-check check-yes"></i></td>
+                              <td><i class="fas fa-check-circle check-echovibe"></i></td>
+                          </tr>
+                          <tr>
+                              <td class="feature-name">AI Mood Matching</td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-check-circle check-echovibe"></i></td>
+                          </tr>
+                          <tr>
+                              <td class="feature-name">Underground Focus</td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-check-circle check-echovibe"></i></td>
+                          </tr>
+                          <tr>
+                              <td class="feature-name">All-in-One Platform</td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-times check-no"></i></td>
+                              <td><i class="fas fa-check-circle check-echovibe"></i></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </section>
+
+      <!-- NEW SECTION 4: TRINITY INTERACTIVE CARDS -->
+      <section class="trinity-section section-gap">
+          <div class="container">
+              <div class="text-center mb-5">
+                  <span class="section-label">THE ECHOVIBE TRINITY</span>
+                  <h2 class="trinity-title">Three Powers, One Platform</h2>
+              </div>
+
+              <div class="trinity-grid">
+                  
+                  <!-- Card 1: Stream -->
+                  <div class="trinity-card stream-card">
+                      <div class="trinity-card-bg"></div>
+                      <div class="trinity-icon-large">
+                          <i class="fas fa-music"></i>
+                          <div class="vinyl-spin"></div>
+                      </div>
+                      <h3 class="trinity-card-title">STREAM 🎵</h3>
+                      <h4 class="trinity-card-subtitle">Infinite Underground Library</h4>
+                      <p class="trinity-card-desc">Curated playlists from the depths. Discover tracks the mainstream won't touch.</p>
+                      <a href="explore.html" class="trinity-cta">Explore Now <i class="fas fa-arrow-right ms-2"></i></a>
+                      <div class="trinity-hover-effect"></div>
+                  </div>
+
+                  <!-- Card 2: Identify -->
+                  <div class="trinity-card identify-card">
+                      <div class="trinity-card-bg"></div>
+                      <div class="trinity-icon-large">
+                          <i class="fas fa-microphone"></i>
+                          <div class="waveform-pulse">
+                              <span></span><span></span><span></span>
+                          </div>
+                      </div>
+                      <h3 class="trinity-card-title">IDENTIFY 🎤</h3>
+                      <h4 class="trinity-card-subtitle">Instant Song Recognition</h4>
+                      <p class="trinity-card-desc">Shazam-powered AI identification. Tap once, know everything.</p>
+                      <a href="features.html" class="trinity-cta">Try It Now <i class="fas fa-arrow-right ms-2"></i></a>
+                      <div class="trinity-hover-effect"></div>
+                  </div>
+
+                  <!-- Card 3: AI Match -->
+                  <div class="trinity-card mood-card">
+                      <div class="trinity-card-bg"></div>
+                      <div class="trinity-icon-large">
+                          <i class="fas fa-brain"></i>
+                          <div class="neural-glow"></div>
+                      </div>
+                      <h3 class="trinity-card-title">MATCH 🧠</h3>
+                      <h4 class="trinity-card-subtitle">AI Mood Matching</h4>
+                      <p class="trinity-card-desc">Your vibe, your soundtrack. 3 questions to perfect playlists.</p>
+                      <a href="features.html" class="trinity-cta">Find Your Frequency <i class="fas fa-arrow-right ms-2"></i></a>
+                      <div class="trinity-hover-effect"></div>
+                  </div>
+
+              </div>
+          </div>
+      </section>
+
+      <!-- NEW SECTION 5: INFOGRAPHIC FLOW -->
+      <section class="infographic-section section-gap">
+          <div class="container">
+              <div class="text-center mb-5">
+                  <span class="section-label">HOW IT WORKS</span>
+                  <h2 class="infographic-title">All-in-One Music Hub</h2>
+                  <p class="infographic-subtitle">Your complete music journey in one seamless flow</p>
+              </div>
+
+              <div class="infographic-flow">
+                  
+                  <!-- Flow Row 1 -->
+                  <div class="flow-row">
+                      <div class="flow-step">
+                          <div class="flow-icon">
+                              <i class="fas fa-smile"></i>
+                          </div>
+                          <h4>Your Mood</h4>
+                          <p>Tell us how you feel</p>
+                      </div>
+                      
+                      <div class="flow-arrow">
+                          <i class="fas fa-arrow-right"></i>
+                          <div class="arrow-glow"></div>
+                      </div>
+                      
+                      <div class="flow-step">
+                          <div class="flow-icon">
+                              <i class="fas fa-brain"></i>
+                          </div>
+                          <h4>AI Analysis</h4>
+                          <p>We match your vibe</p>
+                      </div>
+                      
+                      <div class="flow-arrow">
+                          <i class="fas fa-arrow-right"></i>
+                          <div class="arrow-glow"></div>
+                      </div>
+                      
+                      <div class="flow-step">
+                          <div class="flow-icon">
+                              <i class="fas fa-list-music"></i>
+                          </div>
+                          <h4>Perfect Playlist</h4>
+                          <p>Instant recommendations</p>
+                      </div>
+                  </div>
+
+                  <!-- Vertical Connector -->
+                  <div class="flow-connector">
+                      <div class="connector-line"></div>
+                      <i class="fas fa-arrows-alt-v"></i>
+                  </div>
+
+                  <!-- Flow Row 2 -->
+                  <div class="flow-row flow-row-reverse">
+                      <div class="flow-step">
+                          <div class="flow-icon">
+                              <i class="fas fa-headphones"></i>
+                          </div>
+                          <h4>Hear a Song</h4>
+                          <p>Out in the wild</p>
+                      </div>
+                      
+                      <div class="flow-arrow">
+                          <i class="fas fa-arrow-right"></i>
+                          <div class="arrow-glow"></div>
+                      </div>
+                      
+                      <div class="flow-step">
+                          <div class="flow-icon">
+                              <i class="fas fa-microphone"></i>
+                          </div>
+                          <h4>Shazam It</h4>
+                          <p>Instant ID</p>
+                      </div>
+                      
+                      <div class="flow-arrow">
+                          <i class="fas fa-arrow-right"></i>
+                          <div class="arrow-glow"></div>
+                      </div>
+                      
+                      <div class="flow-step">
+                          <div class="flow-icon">
+                              <i class="fas fa-heart"></i>
+                          </div>
+                          <h4>Add to Library</h4>
+                          <p>Save & stream</p>
+                      </div>
+                  </div>
+
+              </div>
+
+              <div class="infographic-cta text-center mt-5">
+                  <a href="login.html" class="cta-btn-large">Start Your Journey <i class="fas fa-arrow-right ms-2"></i></a>
+              </div>
+          </div>
+      </section>
+
+      <section id="features" class="trending-section section-gap">
+        <div class="container">
+        <h2 class="section-title">
+          Trending <span class="glow-text">Underground</span>
+        </h2>
+
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="cyberpunk">Cyberpunk</button>
+          <button class="filter-btn" data-filter="ambient">Ambient</button>
+          <button class="filter-btn" data-filter="lofi">Lo-Fi</button>
+        </div>
+
+        <div class="matrix-grid">
+          <div class="matrix-card cyberpunk">
+            <div
+              class="card-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=500&q=80');
+              "
+            ></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <h3>NEON VOID</h3>
+              <p>Cyberpunk</p>
+            </div>
+          </div>
+          <div class="matrix-card ambient">
+            <div
+              class="card-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=500&q=80');
+              "
+            ></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <h3>LUNAR ECHO</h3>
+              <p>Ambient</p>
+            </div>
+          </div>
+          <div class="matrix-card lofi">
+            <div
+              class="card-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&q=80');
+              "
+            ></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <h3>STATIC DREAM</h3>
+              <p>Lo-Fi</p>
+            </div>
+          </div>
+          <div class="matrix-card hidden cyberpunk">
+            <div
+              class="card-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&q=80');
+              "
+            ></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <h3>VIRTUAL HAZE</h3>
+              <p>Cyberpunk</p>
+            </div>
+          </div>
+          <div class="matrix-card hidden ambient">
+            <div
+              class="card-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1514525253344-f814d074e01b?w=500&q=80');
+              "
+            ></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <h3>PULSE CODE</h3>
+              <p>Ambient</p>
+            </div>
+          </div>
+          <div class="matrix-card hidden lofi">
+            <div
+              class="card-image"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=500&q=80');
+              "
+            ></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+              <h3>ANALOG SOUL</h3>
+              <p>Lo-Fi</p>
+            </div>
+          </div>
+        </div>
+        <div class="btn-container">
+          <button id="load-more-btn" class="cta-btn secondary">
+            LOAD MORE
+          </button>
+        </div>
+        </div>
+      </section>
+
+      <!-- EXPLORE YOU VIBE REMOVED AS REQUESTED -->
+
+      <section class="roadmap-section section-gap">
+        <div class="container">
+        <h2 class="section-title">The Roadmap</h2>
+        <div class="roadmap-wrapper">
+          <div class="timeline-line"><div class="timeline-progress"></div></div>
+          <div class="road-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <h3>2024</h3>
+              <h4>THE ALPHA PHASE</h4>
+              <p>Launching sonic matching core.</p>
+            </div>
+          </div>
+          <div class="road-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <h3>2025</h3>
+              <h4>ARTIST ECOSYSTEM</h4>
+              <p>Grant programs for indie creators.</p>
+            </div>
+          </div>
+          <div class="road-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+              <h3>2026</h3>
+              <h4>GLOBAL EXPANSION</h4>
+              <p>Spatial audio integration.</p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <section id="community" class="weekly-echo section-gap container">
+        <div class="row editorial-container align-items-center">
+          <!-- Left Column: Image -->
+          <div class="col-lg-6 col-12 editorial-left mb-4 mb-lg-0">
+            <div class="magazine-img w-100">
+              <div class="grain-overlay"></div>
+            </div>
+          </div>
+
+          <!-- Right Column: Text -->
+          <div class="col-lg-6 col-12 editorial-right ps-lg-5">
+            <span class="editorial-tag d-block mb-3">Artist of the Week</span>
+            <h2 class="editorial-title display-4 fw-bold">
+              KARA LYNX: <br />THE SOUND OF SILENCE
+            </h2>
+            <div class="editorial-divider my-4"></div>
+            <p class="editorial-quote fst-italic fs-5 mb-4">
+              "I don't make music for the clubs; I make music for the long
+              drives home when you're alone with your thoughts."
+            </p>
+            <p class="editorial-text">
+              Hailing from the industrial heart of Berlin, Kara Lynx is
+              redefining the underground lo-fi scene. In this exclusive
+              interview, we dive into how she uses field recordings of abandoned
+              factories to create some of the most resonant textures in modern
+              electronic music.
+            </p>
+            <button class="cta-btn secondary echo-read-more">
+              READ FULL STORY
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="live-echo-waveform">
+        <div class="waveform-container">
+          <div class="waveform-text">
+            <span class="tech-tag">The Technology</span>
+            <h2>SONIC <br />MATCHING</h2>
+            <div class="tech-divider"></div>
+            <p>
+              Our algorithm analyzes the literal frequency and texture of every
+              track—the <strong>'DNA' of sound</strong>—to find your perfect
+              frequency in real-time.
+            </p>
+          </div>
+
+          <div class="waveform-visual">
+            <svg
+              id="waveform-svg"
+              viewBox="0 0 1000 400"
+              preserveAspectRatio="none"
+            >
+              <path
+                id="waveform-path"
+                d=""
+                stroke="#bc13fe"
+                stroke-width="3"
+                fill="transparent"
+              />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="under-the-radar">
+        <div class="carousel-header">
+          <h2 class="section-title">
+            Under the <span class="glow-text">Radar</span>
+          </h2>
+          <p class="carousel-subtitle">
+            Fresh voices from the underground, verified by EchoVibe.
+          </p>
+        </div>
+
+        <div class="horizontal-carousel">
+          <div class="carousel-track">
+            <div class="artist-card-large">
+              <div class="artist-img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1520872024865-3ff2805d8bb3?w=600&q=80"
+                  alt="Artist"
+                />
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+              <div class="artist-meta">
+                <h3>SOLA</h3>
+                <p>Dark Pop / Ethereal</p>
+              </div>
+            </div>
+            <div class="artist-card-large">
+              <div class="artist-img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80"
+                  alt="Artist"
+                />
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+              <div class="artist-meta">
+                <h3>K-CODE</h3>
+                <p>Industrial Techno</p>
+              </div>
+            </div>
+            <div class="artist-card-large">
+              <div class="artist-img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80"
+                  alt="Artist"
+                />
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+              <div class="artist-meta">
+                <h3>REZA</h3>
+                <p>Neo-Soul / Lo-Fi</p>
+              </div>
+            </div>
+            <div class="artist-card-large">
+              <div class="artist-img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80"
+                  alt="Artist"
+                />
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+              <div class="artist-meta">
+                <h3>VÆN</h3>
+                <p>Glitched Ambient</p>
+              </div>
+            </div>
+            <div class="artist-card-large">
+              <div class="artist-img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80"
+                  alt="Artist"
+                />
+                <div class="verified-badge">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+              <div class="artist-meta">
+                <h3>ORBIT</h3>
+                <p>Future Garage</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FILTER YOUR FREQUENCY SECTION REMOVED AS REQUESTED -->
+
+      <footer class="footer-section massive-footer">
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row g-5">
+                <!-- Brand Column -->
+                <div class="col-lg-4 col-md-6 text-start">
+                    <h3 class="footer-brand">ECHOVIBE</h3>
+                    <p class="footer-bio">The underground isn't a place. It's a frequency. We amplify the signal.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-spotify"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 text-start">
+                    <h5 class="footer-heading">DISCOVER</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">Trending</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Curated Lists</a></li>
+                        <li><a href="#">Genres</a></li>
+                    </ul>
+                </div>
+    
+                 <!-- Community -->
+                <div class="col-lg-2 col-md-6 text-start">
+                    <h5 class="footer-heading">COMMUNITY</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">For Artists</a></li>
+                        <li><a href="#">Developers</a></li>
+                        <li><a href="#">Advertising</a></li>
+                        <li><a href="#">Investors</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Newsletter -->
+                 <div class="col-lg-4 col-md-6 text-start">
+                    <h5 class="footer-heading">JOIN THE FREQUENCY</h5>
+                    <p class="footer-bio small">Get the best underground tracks delivered to your inbox weekly.</p>
+                    <form class="footer-form mt-3">
+                        <input type="email" placeholder="Email Address">
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom d-flex justify-content-between align-items-center mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <p class="m-0 small text-muted">&copy; 2026 Echovibe Inc. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#" class="small text-muted me-3">Privacy</a>
+                    <a href="#" class="small text-muted">Terms</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BIG ANCHOR TEXT -->
+        <div class="sonic-anchor-text">ECHOVIBE</div>
+        
+        <audio
+          id="audio-player"
+          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        ></audio>
+      </footer>
+    </main>
+
+    <script src="particles.js"></script>
+    <script src="universal.js"></script>
+  </body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore | EchoVibe</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="universal.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- GSAP for Animations & Cursor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+
+    <!-- 1. NAVBAR (Same as Index) -->
+    <nav class="navbar">
+      <div class="logo">ECHOVIBE</div>
+      
+      <!-- DESKTOP LINKS -->
+      <ul class="nav-links desktop-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="playlist.html">Playlists</a></li>
+        <li><a href="index.html#community">Community</a></li>
+        <li><a href="login.html" class="cta-btn small">Log In</a></li>
+      </ul>
+
+      <!-- MOBILE BURGER -->
+      <div class="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-menu-overlay">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="playlist.html">Playlists</a></li>
+        <li><a href="index.html#community">Community</a></li>
+        <li><a href="login.html">Log In</a></li>
+      </ul>
+    </div>
+
+    <!-- 2. EXPLORE DASHBOARD LAYOUT -->
+    <div class="container-fluid explore-container pt-5 mt-5">
+        <div class="row">
+            
+            <!-- LEFT MAIN CONTENT -->
+            <div class="col-lg-9 col-12 main-column">
+                
+                <!-- SEARCH BAR (Like Image) -->
+                <div class="search-wrap mb-4 d-flex align-items-center justify-content-between">
+                    <div class="search-input-box w-100 me-4">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search artists, tracks, or vibes...">
+                    </div>
+                </div>
+
+                <!-- VIDEO HERO CAROUSEL (Requested) -->
+                <!-- VIDEO HERO (EDITORIAL STYLE) -->
+                <!-- Option 2: Massive Typography + Clean Layout -->
+                <div class="hero-editorial mb-5">
+                    <div class="hero-bg-text">THE WEEKND</div>
+                    <div class="hero-fg-image">
+                        <img src="https://images.unsplash.com/photo-1619983081563-430f63602796?w=1000&q=80" alt="Artist">
+                        <div class="hero-overlay-content">
+                            <span class="new-release-badge">NEW RELEASE</span>
+                            <h1 class="display-3 fw-bold">DANCING IN<br>THE FLAMES</h1>
+                            <button class="play-hero-btn mt-3"><i class="fas fa-play"></i> LISTEN NOW</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- "PLAYLISTS FOR YOU" ROW -->
+               <!-- PLAYLIST ACCORDION -->
+<div class="playlist-accordion mb-5">
+
+    <div class="accordion-slice active"
+    style="background-image:url('https://images.unsplash.com/photo-1619983081563-430f63602796?w=600');">
+        <div class="slice-content">
+            <h3>DEJAVU</h3>
+            <p>30 Tracks • Synthwave</p>
+        </div>
+    </div>
+
+    <div class="accordion-slice"
+    style="background-image:url('https://images.unsplash.com/photo-1514525253344-f814d074e01b?w=600');">
+        <div class="slice-content">
+            <h3>DAILY MIX</h3>
+            <p>28 Tracks • Chill</p>
+        </div>
+    </div>
+
+    <div class="accordion-slice"
+    style="background-image:url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=600');">
+        <div class="slice-content">
+            <h3>FRESH FINDS</h3>
+            <p>37 Tracks • Indie</p>
+        </div>
+    </div>
+
+    <div class="accordion-slice"
+    style="background-image:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600');">
+        <div class="slice-content">
+            <h3>EXCLUSIVE</h3>
+            <p>17 Tracks • Underground</p>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- MOOD RECOMMENDATIONS -->
+<div class="mb-5">
+   <h3 class="section-heading mb-3">
+      Mood Recommendations
+   </h3>
+
+   <button class="btn btn-outline-light me-2 mood-btn" data-mood="happy">
+      Happy
+   </button>
+
+   <button class="btn btn-outline-light me-2 mood-btn" data-mood="sad">
+      Sad
+   </button>
+
+   <button class="btn btn-outline-light me-2 mood-btn" data-mood="chill">
+      Chill
+   </button>
+
+   <button class="btn btn-outline-light me-2 mood-btn" data-mood="romantic">
+      Romantic
+   </button>
+</div>
+
+
+<!-- Songs fetched from backend appear here -->
+<div id="songsContainer" class="row mb-5"></div>
+
+
+<!-- YOU MAY ALSO LIKE -->
+<div class="section-header d-flex justify-content-between align-items-center mb-3">
+    <h3 class="section-heading">You may also like</h3>
+    <a href="#" class="view-all">View all</a>
+</div>
+
+<div class="row song-grid">
+
+    <div class="col-md-6 mb-3">
+        <div class="song-wide-card">
+            <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=100">
+            <div class="song-info">
+                <h4>Drunk-Dazed</h4>
+                <p>Enhypen</p>
+            </div>
+            <span class="duration">3:13</span>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <div class="song-wide-card">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100">
+            <div class="song-info">
+                <h4>Wrecked</h4>
+                <p>Imagine Dragons</p>
+            </div>
+            <span class="duration">4:04</span>
+        </div>
+    </div>
+
+</div>
+</div>
+            <!-- RIGHT SIDEBAR (Now Playing) -->
+            <div class="col-lg-3 col-12 sidebar-column">
+                <div class="sidebar-header d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="section-heading">Now playing</h3>
+                    <a href="#" class="view-all">View all</a>
+                </div>
+
+                <div class="queue-list">
+                    <!-- Active Song -->
+                    <div class="queue-item active">
+                        <div class="visualizer-bars">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1621693247912-c96604fe6d68?w=100" class="queue-thumb">
+                        <div class="queue-info">
+                            <h4>Cruel</h4>
+                            <p>Jackson Wang</p>
+                        </div>
+                        <span class="time">03:27</span>
+                    </div>
+
+                    <!-- Next Songs -->
+                     <div class="queue-item">
+                        <img src="https://images.unsplash.com/photo-1619983081563-430f63602796?w=100" class="queue-thumb">
+                        <div class="queue-info">
+                            <h4>Gum</h4>
+                            <p>Jessie</p>
+                        </div>
+                        <span class="time">2:42</span>
+                    </div>
+                     <div class="queue-item">
+                        <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=100" class="queue-thumb">
+                        <div class="queue-info">
+                            <h4>Softcore</h4>
+                            <p>The Neighbourhood</p>
+                        </div>
+                        <span class="time">3:26</span>
+                    </div>
+                     <div class="queue-item">
+                        <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=100" class="queue-thumb">
+                        <div class="queue-info">
+                            <h4>Mockingbird</h4>
+                            <p>Eminem</p>
+                        </div>
+                        <span class="time">4:10</span>
+                    </div>
+                    <div class="queue-item">
+                        <img src="https://images.unsplash.com/photo-1514525253344-f814d074e01b?w=100" class="queue-thumb">
+                        <div class="queue-info">
+                            <h4>MOVE</h4>
+                            <p>TAEMIN</p>
+                        </div>
+                        <span class="time">3:31</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 3. BOTTOM PLAYER BAR (Fixed) -->
+    <div class="bottom-player-bar">
+        <!-- Progress Bar -->
+        <div class="player-progress-container">
+            <div class="player-progress-bar" style="width: 35%;"></div>
+        </div>
+
+        <div class="player-content d-flex justify-content-between align-items-center px-4 py-2">
+            <!-- Left: Current Song -->
+            <div class="current-track d-flex align-items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1621693247912-c96604fe6d68?w=100" class="track-thumb">
+                <div class="track-info">
+                    <h5 class="mb-0">Cruel</h5>
+                    <p class="mb-0 text-muted small">Jackson Wang</p>
+                </div>
+            </div>
+
+            <!-- Center: Controls -->
+            <div class="player-controls d-flex gap-4 align-items-center">
+                <i class="fas fa-random text-muted"></i>
+                <i class="fas fa-step-backward"></i>
+                <div class="play-pause-btn">
+                    <i class="fas fa-pause"></i>
+                </div>
+                <i class="fas fa-step-forward"></i>
+                <i class="fas fa-redo text-muted"></i>
+            </div>
+
+            <!-- Right: Volume/Tools -->
+            <div class="player-tools d-flex gap-3 align-items-center">
+                <i class="fas fa-list"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-volume-up"></i>
+                <div class="volume-slider"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer class="footer-section massive-footer">
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row g-5">
+                <!-- Brand Column -->
+                <div class="col-lg-4 col-md-6 text-start">
+                    <h3 class="footer-brand">ECHOVIBE</h3>
+                    <p class="footer-bio">The underground isn't a place. It's a frequency. We amplify the signal.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-spotify"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 text-start">
+                    <h5 class="footer-heading">DISCOVER</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">Trending</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Curated Lists</a></li>
+                        <li><a href="#">Genres</a></li>
+                    </ul>
+                </div>
+    
+                 <!-- Community -->
+                <div class="col-lg-2 col-md-6 text-start">
+                    <h5 class="footer-heading">COMMUNITY</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">For Artists</a></li>
+                        <li><a href="#">Developers</a></li>
+                        <li><a href="#">Advertising</a></li>
+                        <li><a href="#">Investors</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Newsletter -->
+                 <div class="col-lg-4 col-md-6 text-start">
+                    <h5 class="footer-heading">JOIN THE FREQUENCY</h5>
+                    <p class="footer-bio small">Get the best underground tracks delivered to your inbox weekly.</p>
+                    <form class="footer-form mt-3">
+                        <input type="email" placeholder="Email Address">
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom d-flex justify-content-between align-items-center mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <p class="m-0 small text-muted">&copy; 2026 Echovibe Inc. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#" class="small text-muted me-3">Privacy</a>
+                    <a href="#" class="small text-muted">Terms</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BIG ANCHOR TEXT -->
+        <div class="sonic-anchor-text">ECHOVIBE</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="universal.js"></script>
+
+    <!-- HIDDEN AUDIO PLAYER -->
+    <audio id="echoPlayer" style="display:none"></audio>
+
+    <!-- EXPLORE PLAYER — Event-delegation based, no onclick escaping issues -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      var audio         = document.getElementById('echoPlayer');
+      var progressTimer = null;
+      audio.volume      = 0.8;
+
+      /* ───────────────────────────────────────────
+         1. MOOD BUTTONS — clone to strip old listeners
+      ─────────────────────────────────────────── */
+      document.querySelectorAll('.mood-btn').forEach(function (btn) {
+        var fresh = btn.cloneNode(true);
+        btn.parentNode.replaceChild(fresh, btn);
+
+        fresh.addEventListener('click', async function () {
+          var mood = fresh.dataset.mood;
+          var box  = document.getElementById('songsContainer');
+          box.innerHTML = '<p style="color:#ccc;padding:12px">Loading...</p>';
+
+          try {
+            var res   = await fetch('http://localhost:5000/api/songs/' + mood);
+            var songs = await res.json();
+
+            if (!Array.isArray(songs) || songs.length === 0) {
+              box.innerHTML = '<p style="color:#aaa;padding:12px">No songs found for this mood.</p>';
+              return;
+            }
+
+            /* Render using data-* attributes — zero escaping risk */
+            box.innerHTML = songs.map(function (s) {
+              return (
+                '<div class="col-md-4 mb-4">' +
+                  '<div class="song-wide-card p-3 echo-song-card" style="cursor:pointer"' +
+                       ' data-title="'  + encodeURIComponent(s.title  || '') + '"' +
+                       ' data-artist="' + encodeURIComponent(s.artist || '') + '"' +
+                       ' data-mood="'   + mood + '">' +
+                    '<h4>' + (s.title  || '') + '</h4>' +
+                    '<p>'  + (s.artist || '') + '</p>' +
+                    '<small style="color:#bc13fe"><i class="fas fa-play-circle"></i> Tap to play</small>' +
+                  '</div>' +
+                '</div>'
+              );
+            }).join('');
+
+          } catch (err) {
+            console.error('Mood fetch error:', err);
+            box.innerHTML = '<p style="color:red;padding:12px">Server error — is the backend running?</p>';
+          }
+        });
+      });
+
+      /* ───────────────────────────────────────────
+         2. SONG CLICK — event delegation on container
+      ─────────────────────────────────────────── */
+      var container = document.getElementById('songsContainer');
+      if (container) {
+        container.addEventListener('click', async function (e) {
+          var card = e.target.closest('.echo-song-card');
+          if (!card) return;
+
+          var title  = decodeURIComponent(card.dataset.title);
+          var artist = decodeURIComponent(card.dataset.artist);
+          var mood   = card.dataset.mood;
+
+          /* Immediate feedback in player bar */
+          setBar('Searching preview...', artist, null);
+          setPlayIcon(false);
+
+          /* Save to history (logged-in only, silent fail) */
+          var token = localStorage.getItem('token');
+          if (token) {
+            fetch('http://localhost:5000/api/history', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+              },
+              body: JSON.stringify({ song_name: title, mood: mood })
+            }).catch(function () {});
+          }
+
+          /* iTunes 30-sec preview */
+          try {
+            var term = encodeURIComponent(title + ' ' + artist);
+            var r    = await fetch(
+              'https://itunes.apple.com/search?term=' + term +
+              '&limit=1&entity=song&media=music'
+            );
+            var data = await r.json();
+
+            if (!data.results || !data.results.length || !data.results[0].previewUrl) {
+              setBar(title + ' (no preview)', artist, null);
+              return;
+            }
+
+            var track   = data.results[0];
+            audio.src   = track.previewUrl;
+
+            /* play() returns a Promise — catch block for autoplay policy */
+            audio.play().then(function () {
+              setBar(track.trackName, track.artistName, track.artworkUrl100);
+              setPlayIcon(true);
+              startProgress(30);
+            }).catch(function (err) {
+              console.warn('Autoplay blocked, trying again on next user gesture:', err);
+              setBar(track.trackName + ' ▶ Click play ▼', track.artistName, track.artworkUrl100);
+            });
+
+          } catch (err) {
+            console.error('iTunes error:', err);
+            setBar(title, artist, null);
+          }
+        });
+      }
+
+      /* ───────────────────────────────────────────
+         3. PLAY / PAUSE BUTTON
+      ─────────────────────────────────────────── */
+      var ppBtn = document.querySelector('.play-pause-btn');
+      if (ppBtn) {
+        ppBtn.style.cursor = 'pointer';
+        ppBtn.addEventListener('click', function () {
+          if (!audio.src) return;          /* nothing loaded yet */
+          if (audio.paused) {
+            audio.play().then(function () { setPlayIcon(true);  }).catch(function () {});
+          } else {
+            audio.pause();
+            setPlayIcon(false);
+          }
+        });
+      }
+
+      /* ───────────────────────────────────────────
+         HELPERS
+      ─────────────────────────────────────────── */
+      function setBar(title, artist, artUrl) {
+        var h5 = document.querySelector('.track-info h5');
+        var p  = document.querySelector('.track-info p');
+        var th = document.querySelector('.track-thumb');
+        if (h5) h5.innerText = title;
+        if (p)  p.innerText  = artist || '';
+        if (th && artUrl) th.src = artUrl;
+      }
+
+      function setPlayIcon(playing) {
+        var icon = document.querySelector('.play-pause-btn i');
+        if (!icon) return;
+        icon.className = playing ? 'fas fa-pause' : 'fas fa-play';
+      }
+
+      function startProgress(durationSec) {
+        clearInterval(progressTimer);
+        var bar = document.querySelector('.player-progress-bar');
+        if (!bar) return;
+        bar.style.width = '0%';
+        var elapsed = 0;
+        progressTimer = setInterval(function () {
+          elapsed += 0.1;
+          bar.style.width = Math.min((elapsed / durationSec) * 100, 100) + '%';
+          if (elapsed >= durationSec) {
+            clearInterval(progressTimer);
+            setPlayIcon(false);
+          }
+        }, 100);
+      }
+
+    }); /* end DOMContentLoaded */
+    </script>
+
+  </body>
+</html>
+
