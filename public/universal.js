@@ -365,6 +365,17 @@ document.querySelectorAll(".mobile-nav-links a").forEach(link => {
     });
 });
 
+// Close button (✕) inside the overlay
+const mobileCloseBtn = document.querySelector(".mobile-menu-close");
+mobileCloseBtn?.addEventListener("click", () => {
+    hamburger?.classList.remove("active");
+    mobileMenu?.classList.remove("active");
+    mobileLinks.forEach((link) => {
+        link.style.opacity = "0";
+        link.style.transform = "translateY(20px)";
+    });
+});
+
 
 // ===================================================
 // FEATURE SPOTLIGHT CAROUSEL

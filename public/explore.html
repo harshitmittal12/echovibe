@@ -41,6 +41,7 @@
 
     <!-- MOBILE MENU OVERLAY -->
     <div class="mobile-menu-overlay">
+      <button class="mobile-menu-close" aria-label="Close menu"><i class="fas fa-times"></i></button>
       <ul class="mobile-nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="explore.html">Explore</a></li>
@@ -192,16 +193,16 @@
 
                 <div class="queue-list">
                     <!-- Active Song -->
-                    <div class="queue-item active">
+                    <div class="queue-item active" id="queueNowPlaying">
                         <div class="visualizer-bars">
                             <span></span><span></span><span></span>
                         </div>
-                        <img src="https://images.unsplash.com/photo-1621693247912-c96604fe6d68?w=100" class="queue-thumb">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=100" class="queue-thumb">
                         <div class="queue-info">
-                            <h4>Cruel</h4>
-                            <p>Jackson Wang</p>
+                            <h4>No track selected</h4>
+                            <p>Play a song below</p>
                         </div>
-                        <span class="time">03:27</span>
+                        <span class="time">--:--</span>
                     </div>
 
                     <!-- Next Songs -->
@@ -254,10 +255,10 @@
         <div class="player-content d-flex justify-content-between align-items-center px-4 py-2">
             <!-- Left: Current Song -->
             <div class="current-track d-flex align-items-center gap-3">
-                <img src="https://images.unsplash.com/photo-1621693247912-c96604fe6d68?w=100" class="track-thumb">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=100" class="track-thumb">
                 <div class="track-info">
-                    <h5 class="mb-0">Cruel</h5>
-                    <p class="mb-0 text-muted small">Jackson Wang</p>
+                    <h5 class="mb-0">No track selected</h5>
+                    <p class="mb-0 text-muted small">Search or pick a mood to play</p>
                 </div>
             </div>
 
