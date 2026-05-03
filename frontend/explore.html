@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore and stream music on EchoVibe. Discover songs by mood, search artists, and play full-length tracks." />
     <title>Explore | EchoVibe</title>
-    <!-- Bootstrap 5 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎵%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="universal.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- GSAP for Animations & Cursor -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="config.js"></script>
   </head>
   <body>
 
@@ -27,7 +27,7 @@
         <li><a href="explore.html" class="active">Explore</a></li>
         <li><a href="features.html">Features</a></li>
         <li><a href="playlist.html">Playlists</a></li>
-        <li><a href="index.html#community">Community</a></li>
+        <li><a href="community.html">Community</a></li>
         <li><a href="login.html" class="cta-btn small">Log In</a></li>
       </ul>
 
@@ -46,7 +46,7 @@
         <li><a href="explore.html">Explore</a></li>
         <li><a href="features.html">Features</a></li>
         <li><a href="playlist.html">Playlists</a></li>
-        <li><a href="index.html#community">Community</a></li>
+        <li><a href="community.html">Community</a></li>
         <li><a href="login.html">Log In</a></li>
       </ul>
     </div>
@@ -66,6 +66,9 @@
                     </div>
                 </div>
 
+                <!-- SEARCH RESULTS (appears directly under search bar) -->
+                <div id="searchResultsContainer" class="row mb-5" style="display:none;"></div>
+
                 <!-- VIDEO HERO CAROUSEL (Requested) -->
                 <!-- VIDEO HERO (EDITORIAL STYLE) -->
                 <!-- Option 2: Massive Typography + Clean Layout -->
@@ -76,7 +79,7 @@
                         <div class="hero-overlay-content">
                             <span class="new-release-badge">NEW RELEASE</span>
                             <h1 class="display-3 fw-bold">DANCING IN<br>THE FLAMES</h1>
-                            <button class="play-hero-btn mt-3"><i class="fas fa-play"></i> LISTEN NOW</button>
+                            <button class="play-hero-btn mt-3" id="heroListenBtn" aria-label="Play Dancing In The Flames"><i class="fas fa-play"></i> LISTEN NOW</button>
                         </div>
                     </div>
                 </div>
@@ -151,7 +154,7 @@
 <!-- YOU MAY ALSO LIKE -->
 <div class="section-header d-flex justify-content-between align-items-center mb-3">
     <h3 class="section-heading">You may also like</h3>
-    <a href="#" class="view-all">View all</a>
+    <a href="playlist.html" class="view-all">View all</a>
 </div>
 
 <div class="row song-grid">
@@ -184,7 +187,7 @@
             <div class="col-lg-3 col-12 sidebar-column">
                 <div class="sidebar-header d-flex justify-content-between align-items-center mb-4">
                     <h3 class="section-heading">Now playing</h3>
-                    <a href="#" class="view-all">View all</a>
+                    <a href="playlist.html" class="view-all">View all</a>
                 </div>
 
                 <div class="queue-list">
@@ -242,9 +245,10 @@
 
     <!-- 3. BOTTOM PLAYER BAR (Fixed) -->
     <div class="bottom-player-bar">
-        <!-- Progress Bar -->
-        <div class="player-progress-container">
-            <div class="player-progress-bar" style="width: 35%;"></div>
+        <!-- Progress Bar (Interactive) -->
+        <div class="player-progress-container" id="playerProgressContainer">
+            <div class="player-progress-bar" id="playerProgressBar" style="width: 0%;"></div>
+            <div class="progress-time-tooltip" id="progressTooltip">0:00</div>
         </div>
 
         <div class="player-content d-flex justify-content-between align-items-center px-4 py-2">
@@ -257,23 +261,29 @@
                 </div>
             </div>
 
-            <!-- Center: Controls -->
-            <div class="player-controls d-flex gap-4 align-items-center">
-                <i class="fas fa-random text-muted"></i>
-                <i class="fas fa-step-backward"></i>
-                <div class="play-pause-btn">
-                    <i class="fas fa-pause"></i>
+            <!-- Center: Controls + Time -->
+            <div class="d-flex flex-column align-items-center">
+                <div class="player-controls d-flex gap-4 align-items-center">
+                    <button class="player-ctrl-btn" id="shuffleBtn" aria-label="Shuffle" title="Shuffle"><i class="fas fa-random text-muted"></i></button>
+                    <button class="player-ctrl-btn" id="prevBtn" aria-label="Previous track" title="Previous"><i class="fas fa-step-backward"></i></button>
+                    <div class="play-pause-btn" role="button" aria-label="Play or Pause" tabindex="0">
+                        <i class="fas fa-pause"></i>
+                    </div>
+                    <button class="player-ctrl-btn" id="nextBtn" aria-label="Next track" title="Next"><i class="fas fa-step-forward"></i></button>
+                    <button class="player-ctrl-btn" id="repeatBtn" aria-label="Repeat" title="Repeat"><i class="fas fa-redo text-muted"></i></button>
                 </div>
-                <i class="fas fa-step-forward"></i>
-                <i class="fas fa-redo text-muted"></i>
+                <div class="player-time-display" style="display:flex;gap:6px;font-size:0.7rem;color:#888;margin-top:2px;">
+                    <span id="btTimeNow">0:00</span>
+                    <span>/</span>
+                    <span id="btTimeDur">0:00</span>
+                </div>
             </div>
 
             <!-- Right: Volume/Tools -->
             <div class="player-tools d-flex gap-3 align-items-center">
-                <i class="fas fa-list"></i>
-                <i class="fas fa-heart"></i>
-                <i class="fas fa-volume-up"></i>
-                <div class="volume-slider"></div>
+                <button class="player-ctrl-btn" id="likeBtn" aria-label="Like song" title="Like"><i class="far fa-heart"></i></button>
+                <button class="player-ctrl-btn" id="volumeIcon" aria-label="Mute" title="Mute"><i class="fas fa-volume-up"></i></button>
+                <input type="range" class="volume-range" id="volumeSlider" min="0" max="100" value="80" aria-label="Volume" title="Volume" style="width:80px;accent-color:#bc13fe;" />
             </div>
         </div>
     </div>
@@ -288,10 +298,10 @@
                     <h3 class="footer-brand">ECHOVIBE</h3>
                     <p class="footer-bio">The underground isn't a place. It's a frequency. We amplify the signal.</p>
                     <div class="social-links mt-4">
-                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="me-3"><i class="fab fa-spotify"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="javascript:void(0)" class="me-3" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="javascript:void(0)" class="me-3" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="javascript:void(0)" class="me-3" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                        <a href="javascript:void(0)" aria-label="Discord"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
                 
@@ -299,10 +309,10 @@
                 <div class="col-lg-2 col-md-6 text-start">
                     <h5 class="footer-heading">DISCOVER</h5>
                     <ul class="footer-list">
-                        <li><a href="#">Trending</a></li>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Curated Lists</a></li>
-                        <li><a href="#">Genres</a></li>
+                        <li><a href="explore.html">Trending</a></li>
+                        <li><a href="explore.html">New Arrivals</a></li>
+                        <li><a href="playlist.html">Curated Lists</a></li>
+                        <li><a href="explore.html">Genres</a></li>
                     </ul>
                 </div>
     
@@ -310,10 +320,10 @@
                 <div class="col-lg-2 col-md-6 text-start">
                     <h5 class="footer-heading">COMMUNITY</h5>
                     <ul class="footer-list">
-                        <li><a href="#">For Artists</a></li>
-                        <li><a href="#">Developers</a></li>
-                        <li><a href="#">Advertising</a></li>
-                        <li><a href="#">Investors</a></li>
+                        <li><a href="community.html">For Artists</a></li>
+                        <li><a href="community.html">Developers</a></li>
+                        <li><a href="community.html">Advertising</a></li>
+                        <li><a href="community.html">Investors</a></li>
                     </ul>
                 </div>
     
@@ -331,8 +341,8 @@
             <div class="footer-bottom d-flex justify-content-between align-items-center mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
                 <p class="m-0 small text-muted">&copy; 2026 Echovibe Inc. All rights reserved.</p>
                 <div class="legal-links">
-                    <a href="#" class="small text-muted me-3">Privacy</a>
-                    <a href="#" class="small text-muted">Terms</a>
+                    <a href="javascript:void(0)" class="small text-muted me-3">Privacy</a>
+                    <a href="javascript:void(0)" class="small text-muted">Terms</a>
                 </div>
             </div>
         </div>
@@ -353,7 +363,50 @@
 
       var audio         = document.getElementById('echoPlayer');
       var progressTimer = null;
+      var API_BASE = (window.ECHOVIBE_CONFIG && window.ECHOVIBE_CONFIG.API_BASE_URL) || 'http://localhost:5000';
       audio.volume      = 0.8;
+
+      /* ───────────────────────────────────────────
+         0. AUTO-PLAY FROM URL (?search=query)
+         — Used by Shazam feature to play identified songs
+      ─────────────────────────────────────────── */
+      (async function () {
+        var params = new URLSearchParams(window.location.search);
+        var searchQuery = params.get('search');
+        if (!searchQuery) return;
+
+        // Show loading in player bar
+        var h5 = document.querySelector('.track-info h5');
+        var p  = document.querySelector('.track-info p');
+        if (h5) h5.innerText = 'Loading...';
+
+        try {
+          var term = encodeURIComponent(searchQuery);
+          var res = await fetch('https://saavn.sumit.co/api/search/songs?query=' + term + '&limit=1');
+          var data = await res.json();
+
+          if (data.success && data.data && data.data.results && data.data.results.length) {
+            var track = data.data.results[0];
+            if (track.downloadUrl && track.downloadUrl.length) {
+              var songUrl = track.downloadUrl[track.downloadUrl.length - 1].url;
+              var songName = track.name || searchQuery;
+              var songArtist = (track.artists && track.artists.primary)
+                ? track.artists.primary.map(function(a){ return a.name; }).join(', ') : '';
+              var songImage = (track.image && track.image.length)
+                ? track.image[track.image.length - 1].url : null;
+
+              audio.src = songUrl;
+              audio.play().catch(function(){});
+              if (h5) h5.innerText = songName;
+              if (p) p.innerText = songArtist;
+              var th = document.querySelector('.track-thumb');
+              if (th && songImage) th.src = songImage;
+              var icon = document.querySelector('.play-pause-btn i');
+              if (icon) icon.className = 'fas fa-pause';
+            }
+          }
+        } catch(err) { console.error('Auto-play error:', err); }
+      })();
 
       /* ───────────────────────────────────────────
          1. MOOD BUTTONS — clone to strip old listeners
@@ -365,10 +418,10 @@
         fresh.addEventListener('click', async function () {
           var mood = fresh.dataset.mood;
           var box  = document.getElementById('songsContainer');
-          box.innerHTML = '<p style="color:#ccc;padding:12px">Loading...</p>';
+          box.innerHTML = '<p style="color:#ccc;padding:12px">Loading recommendations...</p>';
 
           try {
-            var res   = await fetch('http://localhost:5000/api/songs/' + mood);
+            var res   = await fetch('' + API_BASE + '/api/songs/' + mood);
             var songs = await res.json();
 
             if (!Array.isArray(songs) || songs.length === 0) {
@@ -376,17 +429,46 @@
               return;
             }
 
-            /* Render using data-* attributes — zero escaping risk */
-            box.innerHTML = songs.map(function (s) {
+            // Fetch iTunes metadata (artwork + duration) for each song
+            var enriched = await Promise.all(songs.map(async function(s) {
+              try {
+                var term = encodeURIComponent((s.title || '') + ' ' + (s.artist || ''));
+                var ires = await fetch('https://itunes.apple.com/search?term=' + term + '&limit=1&entity=song&media=music');
+                var idata = await ires.json();
+                if (idata.results && idata.results.length) {
+                  var t = idata.results[0];
+                  s.artwork = t.artworkUrl100 || '';
+                  s.duration = t.trackTimeMillis || 0;
+                }
+              } catch(e) {}
+              return s;
+            }));
+
+            // Helper to format ms
+            function fmtMs(ms) {
+              if (!ms) return '';
+              var sec = Math.floor(ms / 1000);
+              var m = Math.floor(sec / 60);
+              var s = sec % 60;
+              return m + ':' + (s < 10 ? '0' : '') + s;
+            }
+
+            /* Render with artwork + duration */
+            box.innerHTML = enriched.map(function (s) {
+              var dur = fmtMs(s.duration);
+              var art = s.artwork || '';
               return (
-                '<div class="col-md-4 mb-4">' +
-                  '<div class="song-wide-card p-3 echo-song-card" style="cursor:pointer"' +
+                '<div class="col-md-4 col-sm-6 mb-4">' +
+                  '<div class="search-result-card echo-song-card"' +
                        ' data-title="'  + encodeURIComponent(s.title  || '') + '"' +
                        ' data-artist="' + encodeURIComponent(s.artist || '') + '"' +
                        ' data-mood="'   + mood + '">' +
-                    '<h4>' + (s.title  || '') + '</h4>' +
-                    '<p>'  + (s.artist || '') + '</p>' +
-                    '<small style="color:#bc13fe"><i class="fas fa-play-circle"></i> Tap to play</small>' +
+                    (art ? '<img src="' + art + '" alt="" loading="lazy">' : '') +
+                    '<div class="search-card-info">' +
+                      '<div class="search-card-title">' + (s.title  || '') + '</div>' +
+                      '<div class="search-card-artist">' + (s.artist || '') + '</div>' +
+                    '</div>' +
+                    (dur ? '<div class="search-card-duration">' + dur + '</div>' : '') +
                   '</div>' +
                 '</div>'
               );
@@ -413,13 +495,13 @@
           var mood   = card.dataset.mood;
 
           /* Immediate feedback in player bar */
-          setBar('Searching preview...', artist, null);
+          setBar('Loading song...', artist, null);
           setPlayIcon(false);
 
           /* Save to history (logged-in only, silent fail) */
           var token = localStorage.getItem('token');
           if (token) {
-            fetch('http://localhost:5000/api/history', {
+            fetch('' + API_BASE + '/api/history', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -429,35 +511,70 @@
             }).catch(function () {});
           }
 
-          /* iTunes 30-sec preview */
+          /* Try JioSaavn first (full song), fallback to iTunes (30s preview) */
           try {
             var term = encodeURIComponent(title + ' ' + artist);
-            var r    = await fetch(
-              'https://itunes.apple.com/search?term=' + term +
-              '&limit=1&entity=song&media=music'
-            );
-            var data = await r.json();
 
-            if (!data.results || !data.results.length || !data.results[0].previewUrl) {
-              setBar(title + ' (no preview)', artist, null);
-              return;
+            // 1. Try JioSaavn for full song
+            var saavnRes = await fetch(
+              'https://saavn.sumit.co/api/search/songs?query=' + term + '&limit=3'
+            );
+            var saavnData = await saavnRes.json();
+
+            var fullTrack = null;
+            if (saavnData.success && saavnData.data && saavnData.data.results && saavnData.data.results.length) {
+              fullTrack = saavnData.data.results[0];
             }
 
-            var track   = data.results[0];
-            audio.src   = track.previewUrl;
+            if (fullTrack && fullTrack.downloadUrl && fullTrack.downloadUrl.length) {
+              // Pick highest quality available (320kbps > 160kbps > 96kbps)
+              var downloadUrls = fullTrack.downloadUrl;
+              var songUrl = downloadUrls[downloadUrls.length - 1].url; // highest quality
 
-            /* play() returns a Promise — catch block for autoplay policy */
-            audio.play().then(function () {
-              setBar(track.trackName, track.artistName, track.artworkUrl100);
-              setPlayIcon(true);
-              startProgress(30);
-            }).catch(function (err) {
-              console.warn('Autoplay blocked, trying again on next user gesture:', err);
-              setBar(track.trackName + ' ▶ Click play ▼', track.artistName, track.artworkUrl100);
-            });
+              var songName   = fullTrack.name || title;
+              var songArtist = (fullTrack.artists && fullTrack.artists.primary && fullTrack.artists.primary.length)
+                               ? fullTrack.artists.primary.map(function(a) { return a.name; }).join(', ')
+                               : artist;
+              var songImage  = (fullTrack.image && fullTrack.image.length)
+                               ? fullTrack.image[fullTrack.image.length - 1].url  // 500x500
+                               : null;
+
+              audio.src = songUrl;
+              audio.play().then(function () {
+                setBar(songName, songArtist, songImage);
+                setPlayIcon(true);
+                startProgress(0); // timeupdate handles it
+              }).catch(function (err) {
+                console.warn('Autoplay blocked:', err);
+                setBar(songName + ' ▶ Click play', songArtist, songImage);
+              });
+
+              return; // Success — full song playing
+            }
+
+            // 2. Fallback: iTunes 30-sec preview
+            var itunesRes = await fetch(
+              'https://itunes.apple.com/search?term=' + term + '&limit=1&entity=song&media=music'
+            );
+            var itunesData = await itunesRes.json();
+
+            if (itunesData.results && itunesData.results.length && itunesData.results[0].previewUrl) {
+              var track = itunesData.results[0];
+              audio.src = track.previewUrl;
+              audio.play().then(function () {
+                setBar(track.trackName + ' (30s preview)', track.artistName, track.artworkUrl100);
+                setPlayIcon(true);
+                startProgress(0);
+              }).catch(function (err) {
+                console.warn('Autoplay blocked:', err);
+                setBar(track.trackName + ' ▶ Click play', track.artistName, track.artworkUrl100);
+              });
+            } else {
+              setBar(title + ' (not found)', artist, null);
+            }
 
           } catch (err) {
-            console.error('iTunes error:', err);
+            console.error('Playback error:', err);
             setBar(title, artist, null);
           }
         });
@@ -498,25 +615,238 @@
         icon.className = playing ? 'fas fa-pause' : 'fas fa-play';
       }
 
-      function startProgress(durationSec) {
-        clearInterval(progressTimer);
-        var bar = document.querySelector('.player-progress-bar');
-        if (!bar) return;
-        bar.style.width = '0%';
-        var elapsed = 0;
-        progressTimer = setInterval(function () {
-          elapsed += 0.1;
-          bar.style.width = Math.min((elapsed / durationSec) * 100, 100) + '%';
-          if (elapsed >= durationSec) {
-            clearInterval(progressTimer);
-            setPlayIcon(false);
-          }
-        }, 100);
+      function fmtSec(s) {
+        if (!s || isNaN(s)) return '0:00';
+        var m = Math.floor(s / 60);
+        var sec = Math.floor(s % 60);
+        return m + ':' + (sec < 10 ? '0' : '') + sec;
       }
+
+      /* ───────────────────────────────────────────
+         INTERACTIVE PROGRESS BAR (Seek + Drag)
+      ─────────────────────────────────────────── */
+      var progressContainer = document.getElementById('playerProgressContainer');
+      var progressBar       = document.getElementById('playerProgressBar');
+      var progressTooltip   = document.getElementById('progressTooltip');
+      var btTimeNow         = document.getElementById('btTimeNow');
+      var btTimeDur         = document.getElementById('btTimeDur');
+      var isDragging        = false;
+
+      // Real-time progress update from audio
+      audio.addEventListener('timeupdate', function () {
+        if (isDragging) return; // Don't update while user is dragging
+        if (!audio.duration) return;
+
+        var pct = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = pct + '%';
+        if (btTimeNow) btTimeNow.innerText = fmtSec(audio.currentTime);
+        if (btTimeDur)  btTimeDur.innerText = fmtSec(audio.duration);
+      });
+
+      audio.addEventListener('ended', function () {
+        setPlayIcon(false);
+        progressBar.style.width = '0%';
+        if (btTimeNow) btTimeNow.innerText = '0:00';
+      });
+
+      audio.addEventListener('loadedmetadata', function () {
+        if (btTimeDur) btTimeDur.innerText = fmtSec(audio.duration);
+      });
+
+      // Get seek position from mouse/touch event
+      function getSeekPct(e) {
+        var rect = progressContainer.getBoundingClientRect();
+        var x    = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        return Math.max(0, Math.min(x / rect.width, 1));
+      }
+
+      // Tooltip: show time on hover
+      if (progressContainer) {
+        progressContainer.addEventListener('mousemove', function (e) {
+          if (!audio.duration) return;
+          var pct  = getSeekPct(e);
+          var time = pct * audio.duration;
+          progressTooltip.innerText = fmtSec(time);
+          // Position tooltip
+          var rect = progressContainer.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          progressTooltip.style.left = x + 'px';
+        });
+
+        // Click to seek
+        progressContainer.addEventListener('mousedown', function (e) {
+          if (!audio.duration) return;
+          isDragging = true;
+          progressContainer.classList.add('dragging');
+          var pct = getSeekPct(e);
+          audio.currentTime = pct * audio.duration;
+          progressBar.style.width = (pct * 100) + '%';
+        });
+
+        // Drag to seek
+        document.addEventListener('mousemove', function (e) {
+          if (!isDragging || !audio.duration) return;
+          var pct = getSeekPct(e);
+          progressBar.style.width = (pct * 100) + '%';
+          if (btTimeNow) btTimeNow.innerText = fmtSec(pct * audio.duration);
+          // Update tooltip position
+          var rect = progressContainer.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          progressTooltip.style.left = Math.max(0, Math.min(x, rect.width)) + 'px';
+          progressTooltip.innerText = fmtSec(pct * audio.duration);
+        });
+
+        // Release drag
+        document.addEventListener('mouseup', function (e) {
+          if (!isDragging) return;
+          isDragging = false;
+          progressContainer.classList.remove('dragging');
+          if (!audio.duration) return;
+          var pct = getSeekPct(e);
+          audio.currentTime = pct * audio.duration;
+        });
+
+        // Touch support for mobile
+        progressContainer.addEventListener('touchstart', function (e) {
+          if (!audio.duration) return;
+          isDragging = true;
+          progressContainer.classList.add('dragging');
+          var pct = getSeekPct(e);
+          audio.currentTime = pct * audio.duration;
+          progressBar.style.width = (pct * 100) + '%';
+        }, { passive: true });
+
+        document.addEventListener('touchmove', function (e) {
+          if (!isDragging || !audio.duration) return;
+          var pct = getSeekPct(e);
+          progressBar.style.width = (pct * 100) + '%';
+          if (btTimeNow) btTimeNow.innerText = fmtSec(pct * audio.duration);
+        }, { passive: true });
+
+        document.addEventListener('touchend', function (e) {
+          if (!isDragging) return;
+          isDragging = false;
+          progressContainer.classList.remove('dragging');
+        });
+      }
+
+      // Legacy startProgress kept for compatibility but now audio.timeupdate handles it
+      function startProgress(durationSec) {
+        // No-op — timeupdate handles everything now
+      }
+
+      /* ───────────────────────────────────────────
+         VOLUME SLIDER
+      ─────────────────────────────────────────── */
+      var volSlider = document.getElementById('volumeSlider');
+      var volIcon   = document.getElementById('volumeIcon');
+      if (volSlider) {
+        volSlider.addEventListener('input', function () {
+          var vol = this.value / 100;
+          audio.volume = vol;
+          var icon = volIcon ? volIcon.querySelector('i') : null;
+          if (icon) {
+            if (vol === 0) icon.className = 'fas fa-volume-mute';
+            else if (vol < 0.5) icon.className = 'fas fa-volume-down';
+            else icon.className = 'fas fa-volume-up';
+          }
+        });
+      }
+      if (volIcon) {
+        volIcon.addEventListener('click', function () {
+          if (audio.volume > 0) {
+            volIcon._prevVol = audio.volume;
+            audio.volume = 0;
+            if (volSlider) volSlider.value = 0;
+            volIcon.querySelector('i').className = 'fas fa-volume-mute';
+          } else {
+            audio.volume = volIcon._prevVol || 0.8;
+            if (volSlider) volSlider.value = Math.round(audio.volume * 100);
+            volIcon.querySelector('i').className = 'fas fa-volume-up';
+          }
+        });
+      }
+
+      /* ───────────────────────────────────────────
+         LIKE BUTTON TOGGLE
+      ─────────────────────────────────────────── */
+      var likeBtn = document.getElementById('likeBtn');
+      if (likeBtn) {
+        var isLiked = false;
+        likeBtn.addEventListener('click', function () {
+          isLiked = !isLiked;
+          var icon = likeBtn.querySelector('i');
+          icon.className = isLiked ? 'fas fa-heart' : 'far fa-heart';
+          likeBtn.style.color = isLiked ? '#bc13fe' : '';
+        });
+      }
+
+      /* ───────────────────────────────────────────
+         SHUFFLE & REPEAT TOGGLES
+      ─────────────────────────────────────────── */
+      var shuffleBtn = document.getElementById('shuffleBtn');
+      var repeatBtn  = document.getElementById('repeatBtn');
+
+      if (shuffleBtn) {
+        shuffleBtn.addEventListener('click', function () {
+          this.classList.toggle('active');
+          var icon = this.querySelector('i');
+          icon.classList.toggle('text-muted');
+          icon.style.color = icon.classList.contains('text-muted') ? '' : '#bc13fe';
+        });
+      }
+
+      if (repeatBtn) {
+        repeatBtn.addEventListener('click', function () {
+          audio.loop = !audio.loop;
+          var icon = this.querySelector('i');
+          icon.classList.toggle('text-muted');
+          icon.style.color = audio.loop ? '#bc13fe' : '';
+        });
+      }
+
+      /* ───────────────────────────────────────────
+         HERO "LISTEN NOW" BUTTON
+      ─────────────────────────────────────────── */
+      var heroBtn = document.getElementById('heroListenBtn');
+      if (heroBtn) {
+        heroBtn.addEventListener('click', async function () {
+          setBar('Loading...', 'The Weeknd', null);
+          try {
+            var res = await fetch('https://saavn.sumit.co/api/search/songs?query=Dancing+In+The+Flames+The+Weeknd&limit=1');
+            var data = await res.json();
+            if (data.success && data.data && data.data.results && data.data.results.length) {
+              var track = data.data.results[0];
+              if (track.downloadUrl && track.downloadUrl.length) {
+                var url = track.downloadUrl[track.downloadUrl.length - 1].url;
+                audio.src = url;
+                audio.play().catch(function(){});
+                var name = track.name || 'Dancing In The Flames';
+                var artist = track.artists && track.artists.primary ? track.artists.primary.map(function(a){return a.name}).join(', ') : 'The Weeknd';
+                var img = track.image && track.image.length ? track.image[track.image.length-1].url : null;
+                setBar(name, artist, img);
+                setPlayIcon(true);
+              }
+            }
+          } catch(err) { console.error('Hero play error:', err); }
+        });
+      }
+
+      /* ───────────────────────────────────────────
+         KEYBOARD SHORTCUTS
+      ─────────────────────────────────────────── */
+      document.addEventListener('keydown', function (e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (!audio.src) return;
+          if (audio.paused) { audio.play().catch(function(){}); setPlayIcon(true); }
+          else { audio.pause(); setPlayIcon(false); }
+        }
+      });
 
     }); /* end DOMContentLoaded */
     </script>
 
   </body>
 </html>
-

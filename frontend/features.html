@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EchoVibe features — AI-powered song recognition, mood-based music matching, and more." />
     <title>Features | EchoVibe</title>
-    <!-- Bootstrap 5 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎵%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="universal.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- GSAP for Animations & Cursor -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="config.js"></script>
   </head>
   <body>
 
@@ -27,7 +27,7 @@
         <li><a href="explore.html">Explore</a></li>
         <li><a href="features.html" class="active">Features</a></li>
         <li><a href="playlist.html">Playlists</a></li>
-        <li><a href="index.html#community">Community</a></li>
+        <li><a href="community.html">Community</a></li>
         <li><a href="login.html" class="cta-btn small">Log In</a></li>
       </ul>
 
@@ -46,7 +46,7 @@
         <li><a href="explore.html">Explore</a></li>
         <li><a href="features.html">Features</a></li>
         <li><a href="playlist.html">Playlists</a></li>
-        <li><a href="index.html#community">Community</a></li>
+        <li><a href="community.html">Community</a></li>
         <li><a href="login.html">Log In</a></li>
       </ul>
     </div>
@@ -69,7 +69,22 @@
                             <i class="fas fa-microphone"></i>
                         </button>
                         
-                        <div class="listening-status mt-4">TAP TO IDENTIFY</div>
+                        <div class="listening-status mt-4" id="listenStatus">TAP TO IDENTIFY</div>
+                    </div>
+
+                    <!-- RESULT CARD (hidden by default) -->
+                    <div class="shazam-result-card d-none" id="shazamResult">
+                        <div class="d-flex align-items-center gap-3">
+                            <img id="shazamArt" src="" alt="" style="width:60px;height:60px;border-radius:8px;object-fit:cover;">
+                            <div style="flex:1;min-width:0;">
+                                <h5 class="mb-0" id="shazamTitle" style="color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></h5>
+                                <p class="mb-0" id="shazamArtist" style="color:#aaa;font-size:0.85rem;"></p>
+                                <p class="mb-0" id="shazamAlbum" style="color:#666;font-size:0.75rem;"></p>
+                            </div>
+                            <button class="cta-btn small" id="shazamPlayBtn" style="padding:8px 16px;font-size:0.75rem;">
+                                <i class="fas fa-play me-1"></i> Play
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 ps-lg-5">
@@ -186,29 +201,73 @@
         </section>
 
     </main>
-    
-    <!-- FOOTER (Same as Index) -->
+
+    <!-- FOOTER -->
     <footer class="footer-section massive-footer">
-        <!-- SONIC ANCHOR FOOTER CONTENT (Copied for consistency) -->
-         <div class="container position-relative" style="z-index: 2;">
+        <div class="container position-relative" style="z-index: 2;">
             <div class="row g-5">
+                <!-- Brand Column -->
                 <div class="col-lg-4 col-md-6 text-start">
                     <h3 class="footer-brand">ECHOVIBE</h3>
                     <p class="footer-bio">The underground isn't a place. It's a frequency. We amplify the signal.</p>
+                    <div class="social-links mt-4">
+                        <a href="javascript:void(0)" class="me-3" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="javascript:void(0)" class="me-3" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="javascript:void(0)" class="me-3" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                        <a href="javascript:void(0)" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 text-start">
+                    <h5 class="footer-heading">DISCOVER</h5>
+                    <ul class="footer-list">
+                        <li><a href="explore.html">Trending</a></li>
+                        <li><a href="explore.html">New Arrivals</a></li>
+                        <li><a href="playlist.html">Curated Lists</a></li>
+                        <li><a href="explore.html">Genres</a></li>
+                    </ul>
+                </div>
+    
+                 <!-- Community -->
+                <div class="col-lg-2 col-md-6 text-start">
+                    <h5 class="footer-heading">COMMUNITY</h5>
+                    <ul class="footer-list">
+                        <li><a href="community.html">For Artists</a></li>
+                        <li><a href="community.html">Developers</a></li>
+                        <li><a href="community.html">Advertising</a></li>
+                        <li><a href="community.html">Investors</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Newsletter -->
+                 <div class="col-lg-4 col-md-6 text-start">
+                    <h5 class="footer-heading">JOIN THE FREQUENCY</h5>
+                    <p class="footer-bio small">Get the best underground tracks delivered to your inbox weekly.</p>
+                    <form class="footer-form mt-3">
+                        <input type="email" placeholder="Email Address">
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
                 </div>
             </div>
-             <div class="footer-bottom d-flex justify-content-between align-items-center mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
+            
+            <div class="footer-bottom d-flex justify-content-between align-items-center mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
                 <p class="m-0 small text-muted">&copy; 2026 Echovibe Inc. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="javascript:void(0)" class="small text-muted me-3">Privacy</a>
+                    <a href="javascript:void(0)" class="small text-muted">Terms</a>
+                </div>
             </div>
         </div>
+        
+        <!-- BIG ANCHOR TEXT -->
         <div class="sonic-anchor-text">ECHOVIBE</div>
     </footer>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="universal.js"></script>
     <script>
-        // MIC BUTTON ANIMATION (Keep existing)
+        // MIC BUTTON ANIMATION
         const listenBtn = document.getElementById('listenBtn');
         const statusText = document.querySelector('.listening-status');
         listenBtn.addEventListener('click', () => {
@@ -266,31 +325,27 @@
             progress: document.getElementById('quiz-progress-fill'),
             tracker: document.getElementById('question-tracker'),
             resultArea: document.getElementById('result-card'),
-            quizArea: document.getElementById('question-card') // actually hide question card
+            quizArea: document.getElementById('question-card')
         };
 
         function loadQuestion(index) {
             const q = questions[index];
             ui.text.innerText = q.text;
-            ui.options.innerHTML = ''; // clear old options
+            ui.options.innerHTML = '';
             
-            // Update question number display
             document.getElementById('q-num').innerText = index + 1;
             document.getElementById('current-q').innerText = index + 1;
             
-            // Update step indicators
             document.querySelectorAll('.step').forEach((step, i) => {
                 step.classList.remove('active', 'completed');
                 if (i < index) step.classList.add('completed');
                 if (i === index) step.classList.add('active');
             });
             
-            // Render options with enhanced styling
             q.options.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.className = 'quiz-option-enhanced';
                 
-                // Extract emoji and text
                 const parts = opt.label.split(' ');
                 const emoji = parts[0];
                 const text = parts.slice(1).join(' ');
@@ -300,26 +355,22 @@
                 ui.options.appendChild(btn);
             });
 
-            // Animate question card
             ui.card.style.animation = 'none';
             setTimeout(() => {
                 ui.card.style.animation = 'slideInUp 0.5s ease';
             }, 10);
 
-            // Update Progress
             const progress = ((index) / questions.length) * 100;
             ui.progress.style.width = `${progress}%`;
         }
 
         function handleAnswer(scores) {
-            // Add scores
             for (let genre in scores) {
                 if(userScores[genre] !== undefined) {
                     userScores[genre] += scores[genre];
                 }
             }
 
-            // Next question or Finish
             currentQIndex++;
             if (currentQIndex < questions.length) {
                 loadQuestion(currentQIndex);
@@ -328,22 +379,28 @@
             }
         }
 
+        // Map genre keys to mood values used by the backend
+        const genreToMood = {
+            phonk: 'happy',
+            lofi: 'chill',
+            synthwave: 'happy',
+            techno: 'happy',
+            ambient: 'chill',
+            jazz: 'romantic'
+        };
+
         function showResult() {
-            // Calculate winner
             let winner = Object.keys(userScores).reduce((a, b) => userScores[a] > userScores[b] ? a : b);
             
-            // Calculate match percentage (based on max possible score)
             const maxScore = userScores[winner];
-            const totalPossible = questions.length * 2; // Max 2 points per question
+            const totalPossible = questions.length * 2;
             const matchPercent = Math.round((maxScore / totalPossible) * 100);
             
-            // Hide Question, Show Result
             ui.quizArea.classList.add('d-none');
             document.querySelector('.quiz-progress-enhanced').classList.add('d-none');
             document.querySelector('.step-indicators').classList.add('d-none');
             ui.resultArea.classList.remove('d-none');
 
-            // Set content based on winner
             const resultTitle = document.getElementById('result-genre');
             const resultDesc = document.getElementById('result-desc');
             const sphereCore = document.querySelector('.sphere-core');
@@ -364,9 +421,17 @@
             sphereCore.style.background = `radial-gradient(circle at 30% 30%, ${data.color}, #000)`;
             matchPercentEl.innerText = `${matchPercent}%`;
             
-            // Animate sphere glow to match color
             document.querySelector('.sphere-glow').style.background = 
                 `radial-gradient(circle, ${data.color}40, transparent 70%)`;
+
+            // Wire the "LISTEN NOW" button to redirect to explore with the matched mood
+            const listenNowBtn = ui.resultArea.querySelector('.cta-btn.large');
+            if (listenNowBtn) {
+                const mood = genreToMood[winner] || 'chill';
+                listenNowBtn.onclick = () => {
+                    window.location.href = `explore.html?mood=${mood}`;
+                };
+            }
         }
 
         function resetQuiz() {
@@ -381,70 +446,254 @@
 
         // Init
         loadQuestion(0);
-
-
-    <!-- FOOTER -->
-    <footer class="footer-section massive-footer">
-        <div class="container position-relative" style="z-index: 2;">
-            <div class="row g-5">
-                <!-- Brand Column -->
-                <div class="col-lg-4 col-md-6 text-start">
-                    <h3 class="footer-brand">ECHOVIBE</h3>
-                    <p class="footer-bio">The underground isn't a place. It's a frequency. We amplify the signal.</p>
-                    <div class="social-links mt-4">
-                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="me-3"><i class="fab fa-spotify"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                    </div>
-                </div>
-                
-                <!-- Quick Links -->
-                <div class="col-lg-2 col-md-6 text-start">
-                    <h5 class="footer-heading">DISCOVER</h5>
-                    <ul class="footer-list">
-                        <li><a href="#">Trending</a></li>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Curated Lists</a></li>
-                        <li><a href="#">Genres</a></li>
-                    </ul>
-                </div>
-    
-                 <!-- Community -->
-                <div class="col-lg-2 col-md-6 text-start">
-                    <h5 class="footer-heading">COMMUNITY</h5>
-                    <ul class="footer-list">
-                        <li><a href="#">For Artists</a></li>
-                        <li><a href="#">Developers</a></li>
-                        <li><a href="#">Advertising</a></li>
-                        <li><a href="#">Investors</a></li>
-                    </ul>
-                </div>
-    
-                <!-- Newsletter -->
-                 <div class="col-lg-4 col-md-6 text-start">
-                    <h5 class="footer-heading">JOIN THE FREQUENCY</h5>
-                    <p class="footer-bio small">Get the best underground tracks delivered to your inbox weekly.</p>
-                    <form class="footer-form mt-3">
-                        <input type="email" placeholder="Email Address">
-                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="footer-bottom d-flex justify-content-between align-items-center mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
-                <p class="m-0 small text-muted">&copy; 2026 Echovibe Inc. All rights reserved.</p>
-                <div class="legal-links">
-                    <a href="#" class="small text-muted me-3">Privacy</a>
-                    <a href="#" class="small text-muted">Terms</a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- BIG ANCHOR TEXT -->
-        <div class="sonic-anchor-text">ECHOVIBE</div>
-    </footer>
-
     </script>
+
+    <!-- SONG RECOGNITION (ACRCloud via Backend Proxy + Manual Fallback) -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const listenBtn = document.getElementById('listenBtn');
+        const statusEl = document.getElementById('listenStatus');
+        const resultCard = document.getElementById('shazamResult');
+        const shazamArt = document.getElementById('shazamArt');
+        const shazamTitle = document.getElementById('shazamTitle');
+        const shazamArtist = document.getElementById('shazamArtist');
+        const shazamAlbum = document.getElementById('shazamAlbum');
+        const shazamPlayBtn = document.getElementById('shazamPlayBtn');
+        const API_BASE = (window.ECHOVIBE_CONFIG && window.ECHOVIBE_CONFIG.API_BASE_URL) || 'http://localhost:5000';
+
+        if (!listenBtn) return;
+
+        let isListening = false;
+        let identifiedSong = null;
+
+        // ─── WAV Encoder (Float32 PCM → 16-bit WAV) ────
+        function encodeWAV(samples, sampleRate) {
+            const buffer = new ArrayBuffer(44 + samples.length * 2);
+            const view = new DataView(buffer);
+            function writeStr(offset, str) {
+                for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+            }
+            writeStr(0, 'RIFF');
+            view.setUint32(4, 36 + samples.length * 2, true);
+            writeStr(8, 'WAVE');
+            writeStr(12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, 1, true);       // mono
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true);      // 16-bit
+            writeStr(36, 'data');
+            view.setUint32(40, samples.length * 2, true);
+            for (let i = 0, off = 44; i < samples.length; i++, off += 2) {
+                let s = Math.max(-1, Math.min(1, samples[i]));
+                view.setInt16(off, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+            }
+            return new Blob([buffer], { type: 'audio/wav' });
+        }
+
+        // ─── Record PCM via Web Audio API ──────────────
+        async function recordAudio(durationSec) {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: { channelCount: 1, sampleRate: 44100, echoCancellation: false, noiseSuppression: false, autoGainControl: false }
+            });
+            const ctx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 44100 });
+            const source = ctx.createMediaStreamSource(stream);
+            const proc = ctx.createScriptProcessor(4096, 1, 1);
+            const chunks = [];
+
+            proc.onaudioprocess = function (e) {
+                chunks.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+            };
+            source.connect(proc);
+            proc.connect(ctx.destination);
+
+            await new Promise(r => setTimeout(r, durationSec * 1000));
+
+            proc.disconnect();
+            source.disconnect();
+            ctx.close();
+            stream.getTracks().forEach(t => t.stop());
+
+            // Merge chunks
+            const total = chunks.reduce((a, c) => a + c.length, 0);
+            const merged = new Float32Array(total);
+            let off = 0;
+            for (const c of chunks) { merged.set(c, off); off += c.length; }
+
+            return encodeWAV(merged, 44100);
+        }
+
+        // ─── Show manual search fallback ───────────────
+        function showManualFallback() {
+            statusEl.innerHTML = 'Type the song name: <input type="text" id="manualSongInput" placeholder="Song name or lyrics..." style="background:rgba(255,255,255,0.1);border:1px solid rgba(188,19,254,0.3);color:#fff;padding:8px 14px;border-radius:8px;margin-top:8px;width:250px;font-size:0.85rem;" /><button id="manualSearchBtn" style="background:#bc13fe;color:#fff;border:none;padding:8px 16px;border-radius:8px;margin-left:8px;cursor:pointer;font-size:0.85rem;">Search</button>';
+
+            const manualBtn = document.getElementById('manualSearchBtn');
+            const manualInput = document.getElementById('manualSongInput');
+            if (manualBtn && manualInput) {
+                async function doManualSearch() {
+                    const q = manualInput.value.trim();
+                    if (!q) return;
+                    statusEl.innerText = 'SEARCHING...';
+                    try {
+                        const saavnAPI = 'https://saavn.sumit.co/api';
+                        const res = await fetch(saavnAPI + '/search/songs?query=' + encodeURIComponent(q) + '&limit=1');
+                        const data = await res.json();
+                        if (data.success && data.data && data.data.results && data.data.results.length) {
+                            const song = data.data.results[0];
+                            identifiedSong = {
+                                title: song.name || 'Unknown',
+                                artist: (song.artists && song.artists.primary) ? song.artists.primary.map(a => a.name).join(', ') : 'Unknown',
+                                album: (song.album && song.album.name) ? song.album.name : '',
+                                artwork: (song.image && song.image.length) ? song.image[song.image.length - 1].url : ''
+                            };
+                            shazamTitle.innerText = identifiedSong.title;
+                            shazamArtist.innerText = identifiedSong.artist;
+                            shazamAlbum.innerText = identifiedSong.album;
+                            shazamArt.src = identifiedSong.artwork || 'https://images.unsplash.com/photo-1621693247912-c96604fe6d68?w=200';
+                            resultCard.classList.remove('d-none');
+                            statusEl.innerText = '🎵 TRACK FOUND!';
+                            statusEl.className = 'listening-status mt-4 success';
+                        } else {
+                            statusEl.innerText = 'NO MATCH — TRY DIFFERENT KEYWORDS';
+                            statusEl.className = 'listening-status mt-4 error';
+                        }
+                    } catch (err) {
+                        statusEl.innerText = 'SEARCH FAILED — TRY AGAIN';
+                        statusEl.className = 'listening-status mt-4 error';
+                    }
+                }
+                manualBtn.addEventListener('click', doManualSearch);
+                manualInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doManualSearch(); });
+                manualInput.focus();
+            }
+        }
+
+        // ─── Main Listener ─────────────────────────────
+        listenBtn.addEventListener('click', async function () {
+            if (isListening) return;
+            isListening = true;
+            resultCard.classList.add('d-none');
+            listenBtn.classList.add('listening');
+            statusEl.className = 'listening-status mt-4';
+            statusEl.innerText = 'LISTENING...';
+
+            let countdown = 10;
+            const timer = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    statusEl.innerText = 'LISTENING... ' + countdown + 's';
+                } else {
+                    clearInterval(timer);
+                    statusEl.innerText = 'ANALYZING...';
+                }
+            }, 1000);
+
+            try {
+                // 1. Record 10 seconds of audio as WAV
+                const wavBlob = await recordAudio(10);
+                clearInterval(timer);
+                statusEl.innerText = 'IDENTIFYING TRACK...';
+                console.log('WAV size:', wavBlob.size, 'bytes');
+
+                // 2. Send to backend proxy → ACRCloud / AudD
+                const formData = new FormData();
+                formData.append('audio', wavBlob, 'recording.wav');
+
+                const res = await fetch(API_BASE + '/api/recognize', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await res.json();
+                console.log('Recognition response:', data);
+
+                if (data.error) {
+                    // API not configured — show helpful message + manual search
+                    statusEl.className = 'listening-status mt-4 error';
+                    if (data.help) {
+                        console.warn(data.help);
+                        statusEl.innerText = 'API NOT CONFIGURED — USE MANUAL SEARCH';
+                    } else {
+                        statusEl.innerText = 'SERVER ERROR';
+                    }
+                    setTimeout(showManualFallback, 1500);
+
+                } else if (data.status === 'success' && data.result) {
+                    const r = data.result;
+                    identifiedSong = {
+                        title: r.title || 'Unknown',
+                        artist: r.artist || 'Unknown',
+                        album: r.album || '',
+                        artwork: ''
+                    };
+                    // Try to get artwork from Apple Music or Spotify data
+                    if (r.apple_music && r.apple_music.artwork && r.apple_music.artwork.url) {
+                        identifiedSong.artwork = r.apple_music.artwork.url.replace('{w}', '500').replace('{h}', '500');
+                    } else if (r.spotify && r.spotify.album && r.spotify.album.images && r.spotify.album.images[0]) {
+                        identifiedSong.artwork = r.spotify.album.images[0].url;
+                    }
+                    // Fallback artwork via iTunes search
+                    if (!identifiedSong.artwork) {
+                        try {
+                            const itunesRes = await fetch('https://itunes.apple.com/search?term=' + encodeURIComponent(r.title + ' ' + r.artist) + '&limit=1&entity=song');
+                            const itunesData = await itunesRes.json();
+                            if (itunesData.results && itunesData.results[0]) {
+                                identifiedSong.artwork = itunesData.results[0].artworkUrl100;
+                            }
+                        } catch(e) {}
+                    }
+
+                    shazamTitle.innerText = identifiedSong.title;
+                    shazamArtist.innerText = identifiedSong.artist;
+                    shazamAlbum.innerText = identifiedSong.album;
+                    shazamArt.src = identifiedSong.artwork || 'https://images.unsplash.com/photo-1621693247912-c96604fe6d68?w=200';
+                    resultCard.classList.remove('d-none');
+                    statusEl.innerText = '🎵 TRACK IDENTIFIED!';
+                    statusEl.className = 'listening-status mt-4 success';
+
+                } else if (data.status === 'success' && !data.result) {
+                    statusEl.innerText = 'NO MATCH — PLAY LOUDER & CLOSER';
+                    statusEl.className = 'listening-status mt-4 error';
+                    setTimeout(showManualFallback, 2000);
+
+                } else if (data.status === 'error') {
+                    statusEl.innerText = 'RECOGNITION ERROR — TRY AGAIN';
+                    statusEl.className = 'listening-status mt-4 error';
+                    console.error('Recognition error:', data.error);
+                    setTimeout(showManualFallback, 1500);
+
+                } else {
+                    statusEl.innerText = 'NO RESULT — TRY AGAIN';
+                    statusEl.className = 'listening-status mt-4 error';
+                    setTimeout(showManualFallback, 1500);
+                }
+
+            } catch (err) {
+                clearInterval(timer);
+                console.error('Error:', err);
+                if (err.name === 'NotAllowedError') {
+                    statusEl.innerText = 'MIC ACCESS DENIED — ALLOW IN BROWSER';
+                } else {
+                    statusEl.innerText = 'BACKEND NOT REACHABLE';
+                }
+                statusEl.className = 'listening-status mt-4 error';
+                setTimeout(showManualFallback, 1500);
+            }
+
+            listenBtn.classList.remove('listening');
+            isListening = false;
+        });
+
+        // Play identified song on EchoVibe
+        shazamPlayBtn.addEventListener('click', function () {
+            if (!identifiedSong) return;
+            const query = encodeURIComponent(identifiedSong.title + ' ' + identifiedSong.artist);
+            window.location.href = 'explore.html?search=' + query;
+        });
+    });
+    </script>
+
   </body>
 </html>

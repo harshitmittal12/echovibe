@@ -115,7 +115,7 @@ const password=document.getElementById('loginPassword').value;
 try{
 
 const res=await fetch(
-'http://localhost:5000/api/auth/login',
+(window.ECHOVIBE_CONFIG?.API_BASE_URL || 'http://localhost:5000') + '/api/auth/login',
 {
 method:'POST',
 headers:{
@@ -137,6 +137,7 @@ return;
 
 localStorage.setItem('token',data.token);
 localStorage.setItem('userEmail',email);
+if(data.user && data.user.name) localStorage.setItem('userName',data.user.name);
 
 showSuccessMessage('Login successful!');
 
@@ -147,7 +148,7 @@ window.location.href='explore.html';
 }
 catch(err){
 console.error(err);
-showErrorMessage('Server error');
+showErrorMessage('Server error — is the backend running?');
 }
 
 }
@@ -167,12 +168,13 @@ e.preventDefault();
 
 const name=document.getElementById('signupName').value;
 const email=document.getElementById('signupEmail').value;
+const username=document.getElementById('signupUsername')?.value || '';
 const password=document.getElementById('signupPassword').value;
 
 try{
 
 const res=await fetch(
-'http://localhost:5000/api/auth/signup',
+(window.ECHOVIBE_CONFIG?.API_BASE_URL || 'http://localhost:5000') + '/api/auth/signup',
 {
 method:'POST',
 headers:{
@@ -181,6 +183,7 @@ headers:{
 body:JSON.stringify({
 name,
 email,
+username,
 password
 })
 }
@@ -202,7 +205,7 @@ document.querySelector('[data-tab="login"]').click();
 }
 catch(err){
 console.error(err);
-showErrorMessage('Server error');
+showErrorMessage('Server error — is the backend running?');
 }
 
 }
@@ -271,14 +274,14 @@ errorMsg.style.display='none';
 
 
 
-// Social buttons demo
+// Social buttons — show coming soon message
 document.querySelectorAll('.social-btn').forEach(btn=>{
 btn.addEventListener('click',function(){
 
 const provider=this.querySelector('span').innerText;
 
-showSuccessMessage(
-`Connecting to ${provider}...`
+showErrorMessage(
+`${provider} login coming soon! Use email for now.`
 );
 
 });
