@@ -2,27 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "echovibe-backend/app.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "frontend/**",
-      "use": "@vercel/static"
     }
   ],
-  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/echovibe-backend/app.js"
-    },
-    {
-      "source": "/",
-      "destination": "/frontend/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/frontend/$1"
+      "destination": "/api/index.js"
     }
   ]
 }
