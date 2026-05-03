@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "name": "echovibe",
+  "builds": [
+    {
+      "src": "echovibe-backend/app.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/echovibe-backend/app.js"
+    },
+    {
+      "source": "/(community|explore|features|index|login|playlist|playlist-player|particles|config|universal|community|login)",
+      "destination": "/frontend/$1"
+    },
+    {
+      "source": "/(.*)\\.(html|js|css|png|jpg|jpeg|svg|ico|json)",
+      "destination": "/frontend/$1.$2"
+    },
+    {
+      "source": "/",
+      "destination": "/frontend/index.html"
+    }
+  ]
+}
