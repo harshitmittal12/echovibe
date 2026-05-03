@@ -634,6 +634,7 @@ body {
   text-align: center;
   background: #05010a;
   padding-top: 50px;
+  padding-bottom: 90px;
 }
 .cta-btn {
   background: #bc13fe;
@@ -2815,11 +2816,19 @@ video,
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.track-title-cell > div {
+    min-width: 0;
+    overflow: hidden;
 }
 
 .track-mini-thumb {
     width: 40px;
     height: 40px;
+    min-width: 40px;
     border-radius: 4px;
     object-fit: cover;
 }
@@ -2827,18 +2836,35 @@ video,
 .track-title {
     font-weight: 600;
     color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .track-artist,
 .track-album {
     color: #aaa;
     font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .track-duration {
     color: #666;
     text-align: right;
+    white-space: nowrap;
 }
+
+.track-subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.75rem;
+    color: #888;
+    display: none;
+}
+
 
 /* MODAL */
 .modal-overlay {
@@ -2972,6 +2998,10 @@ video,
     .track-artist,
     .track-album {
         display: none;
+    }
+
+    .track-subtitle {
+        display: block;
     }
     
     .player-tools {
@@ -5084,4 +5114,20 @@ video,
         width: 48px !important;
         height: 48px !important;
     }
+}
+
+/* --- ADDITIONAL MOBILE RESPIVENESS FIXES --- */
+@media (max-width: 768px) {
+  /* Bottom Player Bar */
+  .bottom-player-bar .player-content { padding: 10px !important; flex-wrap: wrap; gap: 10px; }
+  .bottom-player-bar .current-track { width: 100%; justify-content: center; text-align: center; }
+  .bottom-player-bar .player-controls { margin: 0 auto; gap: 15px !important; }
+  .bottom-player-bar #shuffleBtn, .bottom-player-bar #repeatBtn { display: none; }
+  .bottom-player-bar .player-tools { display: none; }
+
+  /* Login Page */
+  .login-options { flex-direction: column; gap: 10px; align-items: center; }
+
+  /* Community Cards */
+  .community-card { width: 100%; }
 }

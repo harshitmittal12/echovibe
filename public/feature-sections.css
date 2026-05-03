@@ -1139,5 +1139,19 @@
     .waveform-container {
         padding: 0 15px;
     }
+
+    /* Mobile Features.html */
+    .features-main .display-3 {
+        font-size: 2.5rem !important;
+    }
+    .quiz-container-enhanced {
+        padding: 20px;
+    }
+    .question-text-large {
+        font-size: 1.5rem !important;
+    }
+    .options-grid-enhanced {
+        grid-template-columns: 1fr;
+    }
 }
 
