@@ -80,9 +80,13 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Internal server error" });
 });
 
-// ─── Start Server ─────────────────────────────
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`\n🎵 EchoVibe API running on port ${PORT}`);
-  console.log(`   http://localhost:${PORT}\n`);
-});
+// ─── Start Server (Only if not running on Vercel) ─────────────
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`\n🎵 EchoVibe API running on port ${PORT}`);
+    console.log(`   http://localhost:${PORT}\n`);
+  });
+}
+
+module.exports = app;
