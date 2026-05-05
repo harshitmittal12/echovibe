@@ -846,77 +846,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // =========================================
 // PLAYLIST PAGE: iTunes Preview Integration
 // =========================================
-document.addEventListener('DOMContentLoaded', () => {
-  const trackList = document.getElementById('trackList');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  if (!trackList || !playPauseBtn) return;
-
-  // Use a dedicated audio element for playlist page
-  let playlistAudio = document.getElementById('echoPlayer') || new Audio();
-  playlistAudio.volume = 0.8;
-
-  // Override track click to use iTunes preview
-  trackList.addEventListener('click', async (e) => {
-    const row = e.target.closest('.track-row');
-    if (!row) return;
-
-    const titleEl = row.querySelector('.track-title');
-    const artistEl = row.querySelector('.track-artist');
-    if (!titleEl || !artistEl) return;
-
-    const title = titleEl.innerText;
-    const artist = artistEl.innerText;
-
-    // Update player bar
-    const pTitle = document.getElementById('playerTitle');
-    const pArtist = document.getElementById('playerArtist');
-    const pThumb = document.getElementById('playerThumb');
-    if (pTitle) pTitle.innerText = 'Loading...';
-    if (pArtist) pArtist.innerText = artist;
-
-    // Highlight row
-    document.querySelectorAll('.track-row').forEach(r => r.classList.remove('playing'));
-    row.classList.add('playing');
-
-    try {
-      const term = encodeURIComponent(title + ' ' + artist);
-      const res = await fetch(
-        `https://itunes.apple.com/search?term=${term}&limit=1&entity=song&media=music`
-      );
-      const data = await res.json();
-
-      if (data.results && data.results.length && data.results[0].previewUrl) {
-        const track = data.results[0];
-        playlistAudio.src = track.previewUrl;
-        playlistAudio.play().catch(() => {});
-
-        if (pTitle) pTitle.innerText = track.trackName || title;
-        if (pArtist) pArtist.innerText = track.artistName || artist;
-        if (pThumb && track.artworkUrl100) pThumb.src = track.artworkUrl100;
-
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-
-        // Progress bar
-        const progBar = document.getElementById('progressBar');
-        if (progBar) {
-          progBar.style.width = '0%';
-          let elapsed = 0;
-          const progInterval = setInterval(() => {
-            if (playlistAudio.paused) { clearInterval(progInterval); return; }
-            elapsed += 0.1;
-            progBar.style.width = Math.min((elapsed / 30) * 100, 100) + '%';
-            if (elapsed >= 30) clearInterval(progInterval);
-          }, 100);
-        }
-      } else {
-        if (pTitle) pTitle.innerText = title + ' (no preview)';
-      }
-    } catch(err) {
-      console.error('iTunes error:', err);
-      if (pTitle) pTitle.innerText = title;
-    }
-  });
-});
+// REMOVED — playlist-player.js handles all playlist playback.
+// Having a duplicate handler here caused songs to play twice
+// and pause to not work (two separate audio elements competing).
 
 // =========================================
 // EXPANDED FULLSCREEN PLAYER (YouTube Music)

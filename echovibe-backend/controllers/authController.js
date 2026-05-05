@@ -52,11 +52,7 @@ exports.signup = async (req, res) => {
     res.status(201).json({ message: "Account created successfully" });
   } catch (err) {
     console.error("Signup error:", err);
-    res.status(500).json({ 
-      message: "Server error. Please try again.",
-      debug_error: err.message,
-      debug_code: err.code
-    });
+    res.status(500).json({ message: "Server error. Please try again." });
   }
 };
 

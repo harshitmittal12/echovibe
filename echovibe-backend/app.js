@@ -76,18 +76,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// ─── Debug: Check env vars (remove after fixing) ─
-app.get("/api/debug", (req, res) => {
-  res.json({
-    DB_HOST: process.env.DB_HOST || "NOT SET",
-    DB_PORT: process.env.DB_PORT || "NOT SET",
-    DB_USER: process.env.DB_USER || "NOT SET",
-    DB_PASSWORD: process.env.DB_PASSWORD ? "SET (" + process.env.DB_PASSWORD.length + " chars)" : "NOT SET",
-    DB_NAME: process.env.DB_NAME || "NOT SET",
-    JWT_SECRET: process.env.JWT_SECRET ? "SET" : "NOT SET",
-  });
-});
-
 // ─── Global Error Handler ─────────────────────
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
