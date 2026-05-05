@@ -364,7 +364,7 @@
 
       var audio         = document.getElementById('echoPlayer');
       var progressTimer = null;
-      var API_BASE = (window.ECHOVIBE_CONFIG && window.ECHOVIBE_CONFIG.API_BASE_URL) || 'http://localhost:5000';
+      var API_BASE = (window.ECHOVIBE_CONFIG && window.ECHOVIBE_CONFIG.API_BASE_URL != null) ? window.ECHOVIBE_CONFIG.API_BASE_URL : 'http://localhost:5000';
       audio.volume      = 0.8;
 
       /* ───────────────────────────────────────────

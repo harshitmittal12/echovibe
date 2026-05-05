@@ -460,7 +460,7 @@
         const shazamArtist = document.getElementById('shazamArtist');
         const shazamAlbum = document.getElementById('shazamAlbum');
         const shazamPlayBtn = document.getElementById('shazamPlayBtn');
-        const API_BASE = (window.ECHOVIBE_CONFIG && window.ECHOVIBE_CONFIG.API_BASE_URL) || 'http://localhost:5000';
+        const API_BASE = (window.ECHOVIBE_CONFIG && window.ECHOVIBE_CONFIG.API_BASE_URL != null) ? window.ECHOVIBE_CONFIG.API_BASE_URL : 'http://localhost:5000';
 
         if (!listenBtn) return;
 

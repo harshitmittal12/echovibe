@@ -115,7 +115,7 @@ const password=document.getElementById('loginPassword').value;
 try{
 
 const res=await fetch(
-(window.ECHOVIBE_CONFIG?.API_BASE_URL || 'http://localhost:5000') + '/api/auth/login',
+(window.ECHOVIBE_CONFIG?.API_BASE_URL ?? 'http://localhost:5000') + '/api/auth/login',
 {
 method:'POST',
 headers:{
@@ -174,7 +174,7 @@ const password=document.getElementById('signupPassword').value;
 try{
 
 const res=await fetch(
-(window.ECHOVIBE_CONFIG?.API_BASE_URL || 'http://localhost:5000') + '/api/auth/signup',
+(window.ECHOVIBE_CONFIG?.API_BASE_URL ?? 'http://localhost:5000') + '/api/auth/signup',
 {
 method:'POST',
 headers:{

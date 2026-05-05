@@ -443,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function saveSongHistory(songName, mood) {
   const token = localStorage.getItem('token');
   if (!token) return;
-  const base = window.ECHOVIBE_CONFIG?.API_BASE_URL || 'http://localhost:5000';
+  const base = window.ECHOVIBE_CONFIG?.API_BASE_URL ?? 'http://localhost:5000';
   try {
     await fetch(base + '/api/history', {
       method: 'POST',
